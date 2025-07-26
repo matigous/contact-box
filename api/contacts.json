@@ -1,0 +1,128 @@
+[
+  {
+    "id": "1",
+    "name": "Alice Mendes",
+    "phone": "+55 11 91234-5678",
+    "fav": true,
+    "email": "alice.mendes@example.com",
+    "photo": "https://randomuser.me/api/portraits/women/1.jpg",
+    "notes": "Amiga da faculdade.",
+    "socialNetworks": [
+      {
+        "type": "Instagram",
+        "url": "https://instagram.com/alicemendes"
+      },
+      {
+        "type": "LinkedIn",
+        "url": "https://linkedin.com/in/alicemendes"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Bruno Carvalho",
+    "phone": "+55 21 99876-5432",
+    "fav": false,
+    "email": "bruno.carvalho@example.com",
+    "socialNetworks": [
+      {
+        "type": "GitHub",
+        "url": "https://github.com/brunocarvalho"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Carla Souza",
+    "phone": "+55 31 98765-4321",
+    "fav": true,
+    "email": "carla.souza@example.com",
+    "photo": "https://randomuser.me/api/portraits/women/3.jpg",
+    "notes": "Contato de trabalho."
+  },
+  {
+    "id": "4",
+    "name": "Daniel Costa",
+    "phone": "+55 51 91234-8765",
+    "fav": false
+  },
+  {
+    "id": "5",
+    "name": "Eduarda Lima",
+    "phone": "+55 61 99888-1122",
+    "fav": false,
+    "email": "eduarda.lima@example.com",
+    "socialNetworks": [
+      {
+        "type": "Facebook",
+        "url": "https://facebook.com/eduardalima"
+      },
+      {
+        "type": "Instagram",
+        "url": "https://instagram.com/eduardalima"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Felipe Rocha",
+    "phone": "+55 71 98765-1234",
+    "fav": true,
+    "photo": "https://randomuser.me/api/portraits/men/6.jpg",
+    "socialNetworks": [
+      {
+        "type": "Telegram",
+        "url": "https://t.me/feliperocha"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Gabriela Martins",
+    "phone": "+55 41 99123-4567",
+    "fav": false,
+    "email": "gabriela.martins@example.com",
+    "notes": "Cliente em potencial."
+  },
+  {
+    "id": "8",
+    "name": "Henrique Almeida",
+    "phone": "+55 85 98877-6655",
+    "fav": true,
+    "email": "henrique.almeida@example.com",
+    "socialNetworks": [
+      {
+        "type": "LinkedIn",
+        "url": "https://linkedin.com/in/henriquealmeida"
+      },
+      {
+        "type": "GitHub",
+        "url": "https://github.com/henriquealmeida"
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Isabela Nunes",
+    "phone": "+55 62 99777-3344",
+    "fav": false
+  },
+  {
+    "id": "10",
+    "name": "João Pedro Silva",
+    "phone": "+55 82 91234-5566",
+    "fav": true,
+    "email": "joao.silva@example.com",
+    "photo": "https://randomuser.me/api/portraits/men/10.jpg",
+    "socialNetworks": [
+      {
+        "type": "YouTube",
+        "url": "https://youtube.com/joaopedrosilva"
+      },
+      {
+        "type": "Reddit",
+        "url": "https://reddit.com/u/joaopedrosilva"
+      }
+    ]
+  }
+]
