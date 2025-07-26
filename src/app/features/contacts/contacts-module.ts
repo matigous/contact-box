@@ -4,10 +4,12 @@ import { List } from './list/list';
 import { Details } from './details/details';
 import { ListItem } from './list/components/list-item/list-item';
 import { Filter } from './list/components/filter/filter';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card'
 
 @NgModule({
   declarations: [List, Details, ListItem, Filter],
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule],
   exports: [List, Details],
 })
 export class ContactsModule { }
