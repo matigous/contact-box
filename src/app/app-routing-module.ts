@@ -12,11 +12,18 @@ const routes: Routes = [
   {
     path: 'contacts',
     component: List,
+  },
+  {
+    path: 'contact-details',
     children: [
       {
-        path: ':id',
+        path: '',
         component: Details
-      }
+      },
+      {
+        path: ':id',
+        component: Details,
+      },
     ]
   }
 ];
