@@ -1,5 +1,35 @@
 .contact-container {
   display: flex;
-  height: 70px;
-  background-color: blue;
+  flex-direction: row;
+  height: 70px;  
+  justify-content: space-between;  
+}
+.mat-mdc-card {
+  box-shadow: none;
+  border-radius: 0; 
+  cursor: pointer;
+}
+.mat-mdc-card:hover {
+  background-color: #f0f0f0;
+}
+.mat-mdc-card-header{
+  width: 300px;
+}
+.contact-phone{
+  display: flex;
+  width: 300px;
+  align-items: center;  
+  gap: 10px;
+}
+.mat-mdc-card-avatar {
+  margin: 0;
+}
+.mat-mdc-card-actions{
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+}
+.mdc-fab{
+  background: none;
+  box-shadow: none;
 }

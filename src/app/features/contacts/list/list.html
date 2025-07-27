@@ -2,8 +2,8 @@
   <div class="list-filter">
 
   </div>
-  <div class="list-contacts">
-    <app-list-item [contactItem]="contacts[0]"></app-list-item>
+  <div class="list-contacts" *ngFor="let contact of contacts">
+    <app-list-item [contactItem]="contact"></app-list-item>
   </div>
 
 

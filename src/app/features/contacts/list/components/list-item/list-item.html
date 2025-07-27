@@ -1,21 +1,21 @@
-<div class="contact-container">
-  <mat-card class="example-card" appearance="outlined">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.dev/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button matButton>LIKE</button>
-      <button matButton>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+<mat-card (click)="show(contactItem.id)" class="contact-container">
+  <mat-card-header>
+    <img mat-card-avatar src="{{contactItem.photo}}" alt="contact photo">
+    <mat-card-title>{{contactItem.name}}</mat-card-title>
+    <mat-card-subtitle>{{contactItem.notes}}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="contact-phone">
+    <img mat-card-avatar
+      src="https://static.vecteezy.com/ti/vetor-gratis/t1/34371065-brasil-bandeira-brasileiro-bandeira-vetor.jpg"
+      alt="Photo of a Shiba Inu">
+    <mat-card-title>{{contactItem.phone}}</mat-card-title>
+  </div>
+
+  <mat-card-actions>
+    <button matMiniFab><mat-icon style="color: #C19EC9;"> phone</mat-icon></button>
+    <button matMiniFab><mat-icon style="color: #72C6DF"> chat_bubble</mat-icon></button>
+    <button matMiniFab><mat-icon style="color: #74C170">videocam</mat-icon></button>
+    <button matMiniFab><mat-icon>more_vert</mat-icon></button>
+  </mat-card-actions>
+  
+</mat-card>

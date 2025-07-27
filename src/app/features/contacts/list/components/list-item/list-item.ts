@@ -9,5 +9,8 @@ import { Contact } from '../../../../../shared/types/types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItem {
-  @Input() contactItem!: Contact;
+  @Input() contactItem: Contact = {} as Contact;
+  show(id: string){
+    console.log(id)
+  }
 }
