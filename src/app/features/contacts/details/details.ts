@@ -1,11 +1,147 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { ContactFormService } from '../../../shared/services/contact-form-service';
+import { FormArray, FormGroup } from '@angular/forms';
+import { ContactsService } from '../../../shared/services/contacts-service';
+import { Contact, DetailsModeType } from '../../../shared/types/types';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
   standalone: false,
   templateUrl: './details.html',
-  styleUrl: './details.scss'
+  styleUrl: './details.scss',
 })
-export class Details {
+export class Details implements OnInit {
 
+  //TODO:
+  // 1) Dropdown Type Social Network - Get from Api
+  // 2) Icons Social Network
+
+  protected formService = inject(ContactFormService);
+  protected apiService = inject(ContactsService);
+  protected activatedRoute = inject(ActivatedRoute);
+  protected router = inject(Router);
+
+  protected contactForm?: FormGroup;
+  protected idContact?: string;
+  protected confirmingDelete = false;
+  protected editingPhotoUrl = false;
+  protected mode: DetailsModeType = 'creating';
+  protected timeoutConfirmingDelete: any;
+
+  @ViewChild('photoUrlInput') photoUrlInput?: ElementRef<HTMLInputElement>;
+
+  constructor() {
+    this.idContact = this.activatedRoute.snapshot.params['id'];
+    this.contactForm = this.formService.formGroup;
+    if (this.idContact) {
+      this.mode = 'viewing';
+      this.getContactAndFillForms();
+    }
+  }
+
+  ngOnInit(): void {}
+
+  protected isViewing(): boolean {
+    return this.mode === 'viewing';
+  }
+
+  protected isEditing(): boolean {
+    return this.mode === 'editing';
+  }
+
+  protected isCreating(): boolean {
+    return this.mode === 'creating';
+  }
+
+  private getContactAndFillForms() {
+    if (this.idContact) {
+      let contact = this.apiService.getContactById(this.idContact);
+      if (contact) {
+        this.formService.fillForm(contact);
+      }
+    }
+  }
+
+  protected get socialNetworksControls() {
+    return (
+      (this.contactForm?.get('socialNetworks') as FormArray)?.controls || []
+    );
+  }
+
+  protected openWhatsapp(phone: string): void {
+    if (!phone) return;
+    const digits = phone.replace(/\D/g, '');
+    const link = `https://wa.me/${digits}`;
+    window.open(link, '_blank');
+  }
+
+  protected addSocialNetwork() {
+    const snArray = this.contactForm?.get('socialNetworks') as FormArray;
+    snArray.push(this.formService.createSocialNetwork());
+  }
+
+  protected removeSocialNetwork(index: number) {
+    const snArray = this.contactForm?.get('socialNetworks') as FormArray;
+    snArray.removeAt(index);
+  }
+
+  protected toogleEditPhotoUrl() {
+    this.editingPhotoUrl = !this.editingPhotoUrl;
+    setTimeout(() => {
+      this.photoUrlInput?.nativeElement?.focus();
+    }, 10);
+  }
+
+  protected toggleFavorite() {
+    const current = this.contactForm?.get('fav')?.value;
+    this.contactForm?.patchValue({ fav: !current });
+    this.apiService.updateContact(this.contactForm?.getRawValue());
+  }
+
+  protected onEdit() {
+    this.mode = 'editing';
+  }
+
+  protected onCancel() {
+    this.mode = 'viewing';
+    if (this.idContact) {
+      this.getContactAndFillForms();
+    }
+  }
+
+  protected onSubmit() {
+    if (this.contactForm?.valid) {
+      if (this.isCreating()) {
+        this.apiService.addContact(this.contactForm?.getRawValue());
+        this.mode = 'viewing';
+      }
+
+      if (this.isEditing()) {
+        this.apiService.updateContact(this.contactForm?.getRawValue());
+        this.mode = 'viewing';
+      }
+    }
+  }
+
+  onConfirmingDelete() {
+    clearTimeout(this.timeoutConfirmingDelete);
+    this.timeoutConfirmingDelete = setInterval(() => {
+      if (this.confirmingDelete) this.confirmingDelete = false;
+    }, 3000);
+    this.confirmingDelete = true;
+  }
+
+  protected onDelete() {
+    if (this.idContact) {
+      this.apiService.deleteContact(this.idContact);
+      this.router.navigate(['/']);
+    }
+  }
 }

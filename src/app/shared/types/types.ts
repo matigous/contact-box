@@ -24,3 +24,5 @@ export enum SocialNetworkType {
   Telegram = 'Telegram',
   Reddit = 'Reddit'
 }
+
+export type DetailsModeType = 'viewing' | 'editing' | 'creating';
