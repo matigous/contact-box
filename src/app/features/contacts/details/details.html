@@ -102,7 +102,7 @@
           </mat-form-field>
         </div>
 
-        <!-- Seção: Telefone e Email -->
+        <!-- Phone and e-mail -->
         <div class="contact-info-row">
           <mat-form-field
             [appearance]="isViewing() ? 'fill' : 'outline'"
@@ -118,7 +118,7 @@
             <button
               mat-icon-button
               matSuffix
-              matTooltip="Abrir no Whattsapp"
+              matTooltip="Open in Whatsapp"
               type="button"
               [style.color]="'green'"
               (click)="openWhatsapp(contactForm.get('phone')?.value)"
@@ -136,7 +136,7 @@
           </mat-form-field>
         </div>
 
-        <!-- Notas -->
+        <!-- Notes -->
         <div class="contact-info-row">
           <mat-form-field
             [appearance]="isViewing() ? 'fill' : 'outline'"
@@ -151,18 +151,18 @@
           </mat-form-field>
         </div>
 
-        <!-- Redes Sociais -->
+        <!-- Social Networks -->
         <div class="contact-info-row">
           <ng-container *ngIf="contactForm.get('socialNetworks')?.value as sns">
             <div *ngIf="sns.length" class="social-icons w-full">
               <div class="contact-info-item">
-                <mat-label>Redes Sociais</mat-label>
+                <mat-label>Social Networks</mat-label>
                 <a
                   *ngFor="let sn of sns"
                   [href]="sn.url"
                   target="_blank"
                   style="margin-left: 1rem"
-                  [matTooltip]="'Abrir perfil do ' + sn.type"
+                  [matTooltip]="'Open profile in ' + sn.type"
                 >
                   <mat-icon>{{ sn.type[0] }}</mat-icon>
                 </a>
@@ -231,7 +231,7 @@
         </div>
       </mat-card-content>
 
-      <!-- Botões de Ação -->
+      <!-- Actions buttons -->
       <mat-card-actions class="card-actions">
         <div *ngIf="!isViewing()" class="w-full btns-editing-creating">
           <button
