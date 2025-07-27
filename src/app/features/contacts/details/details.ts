@@ -10,6 +10,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { ContactsService } from '../../../shared/services/contacts-service';
 import { Contact, DetailsModeType } from '../../../shared/types/types';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-details',
@@ -27,6 +28,7 @@ export class Details implements OnInit {
   protected apiService = inject(ContactsService);
   protected activatedRoute = inject(ActivatedRoute);
   protected router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
   protected contactForm?: FormGroup;
   protected idContact?: string;
@@ -34,6 +36,7 @@ export class Details implements OnInit {
   protected editingPhotoUrl = false;
   protected mode: DetailsModeType = 'creating';
   protected timeoutConfirmingDelete: any;
+  private snackBarDuration = 2000;
 
   @ViewChild('photoUrlInput') photoUrlInput?: ElementRef<HTMLInputElement>;
 
@@ -69,6 +72,12 @@ export class Details implements OnInit {
     }
   }
 
+  sendMessage(message: string, action?: string) {
+    this.snackBar.open(message,action,{
+        duration: this.snackBarDuration}
+      );
+  }
+
   protected get socialNetworksControls() {
     return (
       (this.contactForm?.get('socialNetworks') as FormArray)?.controls || []
@@ -102,6 +111,8 @@ export class Details implements OnInit {
   protected toggleFavorite() {
     const current = this.contactForm?.get('fav')?.value;
     this.contactForm?.patchValue({ fav: !current });
+    if(current) this.sendMessage('Contact was unfavorite');
+    else        this.sendMessage('Contact has been favorited');
     this.apiService.updateContact(this.contactForm?.getRawValue());
   }
 
@@ -121,11 +132,13 @@ export class Details implements OnInit {
       if (this.isCreating()) {
         this.apiService.addContact(this.contactForm?.getRawValue());
         this.mode = 'viewing';
+        this.sendMessage('Contact added');
       }
 
       if (this.isEditing()) {
         this.apiService.updateContact(this.contactForm?.getRawValue());
         this.mode = 'viewing';
+        this.sendMessage('Contact edited');
       }
     }
   }
@@ -141,7 +154,11 @@ export class Details implements OnInit {
   protected onDelete() {
     if (this.idContact) {
       this.apiService.deleteContact(this.idContact);
-      this.router.navigate(['/']);
+      this.sendMessage('Contact deleted');
+      setTimeout(() => {
+        this.router.navigate(['/']);
+      }, this.snackBarDuration);
+      
     }
   }
 }

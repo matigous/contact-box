@@ -14,6 +14,7 @@ import { Details } from './details';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [Details],
@@ -34,6 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatTooltipModule,
     MatDialogModule,
+    MatSnackBarModule
   ],
 })
 export class DetailsModule {}
