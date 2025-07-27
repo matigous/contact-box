@@ -8,10 +8,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card'
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [List, Details, ListItem, Filter],
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, MatDividerModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, MatDividerModule, MatMenuModule],
   exports: [List, Details],
 })
 export class ContactsModule { }

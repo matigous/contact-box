@@ -2,7 +2,7 @@
   <mat-card-header>
     <img *ngIf="contactItem.photo; else noAvatar" mat-card-avatar src="{{contactItem.photo}}" alt="contact photo">
     <ng-template #noAvatar>
-      <div mat-card-avatar class="no-avatar" >
+      <div mat-card-avatar class="no-avatar">
         <span class="letter-avatar">
           {{contactItem.name.charAt(0)}}
         </span>
@@ -18,10 +18,22 @@
   </div>
 
   <mat-card-actions>
-    <button matMiniFab><mat-icon style="color: #C19EC9;"> phone</mat-icon></button>
-    <button matMiniFab><mat-icon style="color: #72C6DF"> chat_bubble</mat-icon></button>
-    <button matMiniFab><mat-icon style="color: #74C170">videocam</mat-icon></button>
-    <button matMiniFab><mat-icon>more_vert</mat-icon></button>
+    <button matMiniFab disabled><mat-icon style="color: #C19EC9;" > phone</mat-icon></button>
+    <button matMiniFab disabled><mat-icon style="color: #72C6DF" > chat_bubble</mat-icon></button>
+    <button matMiniFab disabled><mat-icon style="color: #74C170" > videocam</mat-icon></button>
+    <button matMiniFab [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" disabled>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" >
+      <button mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        <span>Editar</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>delete_outline</mat-icon>
+        <span>Deletar</span>
+      </button>
+    </mat-menu>
   </mat-card-actions>
 </mat-card>
 <mat-divider></mat-divider>

@@ -9,9 +9,7 @@
   border-radius: 0; 
   cursor: pointer;
 }
-.mat-mdc-card:hover {
-  background-color: var(--mat-sys-primary-container);
-}
+
 .mat-mdc-card-header{
   width: 300px;
 }
@@ -49,5 +47,5 @@
 }
 .letter-avatar {
   color: white;
-  margin: 10px;
+  margin: 12px;
 }
