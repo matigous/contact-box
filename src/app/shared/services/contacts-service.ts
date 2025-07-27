@@ -17,8 +17,10 @@ export class ContactsService {
     return this.contacts;
   }
 
-  addContact(contact: Contact): void {
+  addContact(contact: Contact): Contact {
+    contact.id = (this.contacts.length + 1).toString();
     this.contacts.push(contact);
+    return contact
   }
 
   updateContact(contact: Contact): void {

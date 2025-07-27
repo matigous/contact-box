@@ -47,7 +47,7 @@ export class Details implements OnInit {
       this.mode = 'viewing';
       this.getContactAndFillForms();
     }
-  }
+  } 
 
   ngOnInit(): void {}
 
@@ -129,14 +129,17 @@ export class Details implements OnInit {
 
   protected onSubmit() {
     if (this.contactForm?.valid) {
+      let contact: Contact = this.contactForm?.getRawValue();
       if (this.isCreating()) {
-        this.apiService.addContact(this.contactForm?.getRawValue());
+        let newContact = this.apiService.addContact(contact);
         this.mode = 'viewing';
         this.sendMessage('Contact added');
+        console.log(newContact);
+        this.router.navigate(['/contact-details/' + newContact.id])
       }
 
       if (this.isEditing()) {
-        this.apiService.updateContact(this.contactForm?.getRawValue());
+        this.apiService.updateContact(contact);
         this.mode = 'viewing';
         this.sendMessage('Contact edited');
       }
