@@ -5,20 +5,27 @@ import { Details } from './features/contacts/details/details';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'contacts',
+    component: List,
+  },
+  {
+    path: 'contact-details',
+    children: [
+      {
+        path: '',
+        component: Details
+      },
+      {
+        path: ':id',
+        component: Details,
+      },
+    ]
+  },
+  {
+    path: '**',
     redirectTo: 'contacts',
     pathMatch: 'full'
   },
-  {
-    path: 'contacts',
-    component: List,
-    children: [
-      {
-        path: ':id',
-        component: Details
-      }
-    ]
-  }
 ];
 
 @NgModule({
