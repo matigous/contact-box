@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Header } from './shared/components/header/header';
+import { ContactsModule } from './features/contacts/contacts-module'
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { Header } from './shared/components/header/header';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ContactsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
