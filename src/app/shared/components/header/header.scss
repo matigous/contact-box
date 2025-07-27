@@ -1,0 +1,17 @@
+.app-header {
+  mat-toolbar {
+    background-color: var(--mat-sys-primary);
+    border-radius: 0;
+    color: var(--mat-sys-on-primary);
+    padding: 0 40px;
+    height: 86px;
+  }
+
+  img {
+    height: 86px;
+  }
+
+  h1 {
+    margin-left: 30%;
+  }
+}
