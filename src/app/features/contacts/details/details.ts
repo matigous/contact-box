@@ -32,6 +32,7 @@ export class Details implements OnInit {
 
   protected contactForm?: FormGroup;
   protected idContact?: string;
+  protected contact?: Contact;
   protected confirmingDelete = false;
   protected editingPhotoUrl = false;
   protected mode: DetailsModeType = 'creating';
@@ -46,7 +47,14 @@ export class Details implements OnInit {
     if (this.idContact) {
       this.mode = 'viewing';
       this.getContactAndFillForms();
+      if(!this.contact) {
+        this.sendMessage('You will be redirected to the contact list in 5 seconds',undefined,5000);
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 5000);
+      }
     }
+    
   } 
 
   ngOnInit(): void {}
@@ -65,16 +73,16 @@ export class Details implements OnInit {
 
   private getContactAndFillForms() {
     if (this.idContact) {
-      let contact = this.apiService.getContactById(this.idContact);
-      if (contact) {
-        this.formService.fillForm(contact);
+      this.contact = this.apiService.getContactById(this.idContact);
+      if (this.contact) {
+        this.formService.fillForm(this.contact);
       }
     }
   }
 
-  sendMessage(message: string, action?: string) {
+  sendMessage(message: string, action?: string, duration: number = this.snackBarDuration) {
     this.snackBar.open(message,action,{
-        duration: this.snackBarDuration}
+        duration: duration}
       );
   }
 
@@ -134,7 +142,6 @@ export class Details implements OnInit {
         let newContact = this.apiService.addContact(contact);
         this.mode = 'viewing';
         this.sendMessage('Contact added');
-        console.log(newContact);
         this.router.navigate(['/contact-details/' + newContact.id])
       }
 

@@ -128,6 +128,15 @@
   margin-top: 0.5rem;
 }
 
+.contact-not-found {
+  display: flex;
+  text-align: center;
+  font-size: large;
+  padding: 10rem;
+  margin: 5rem;
+  color: #d32f2f;
+}
+
 :host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: rgba(191, 224, 247, 0.533);
 }
