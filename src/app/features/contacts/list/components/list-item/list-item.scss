@@ -10,7 +10,7 @@
   cursor: pointer;
 }
 .mat-mdc-card:hover {
-  background-color: #f0f0f0;
+  background-color: var(--mat-sys-primary-container);
 }
 .mat-mdc-card-header{
   width: 300px;
@@ -32,4 +32,11 @@
 .mdc-fab{
   background: none;
   box-shadow: none;
+}
+.national-flag{
+  width: 32px;
+  height: 32px;
+}
+.mat-divider {
+  border-color:  #cfcfcfe0;
 }

@@ -7,10 +7,11 @@ import { Filter } from './list/components/filter/filter';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card'
 import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [List, Details, ListItem, Filter],
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, MatDividerModule],
   exports: [List, Details],
 })
 export class ContactsModule { }
