@@ -1,12 +1,18 @@
 <mat-card (click)="show(contactItem.id)" class="contact-container">
   <mat-card-header>
-    <img mat-card-avatar src="{{contactItem.photo}}" alt="contact photo">
+    <img *ngIf="contactItem.photo; else noAvatar" mat-card-avatar src="{{contactItem.photo}}" alt="contact photo">
+    <ng-template #noAvatar>
+      <div mat-card-avatar class="no-avatar" >
+        <span class="letter-avatar">
+          {{contactItem.name.charAt(0)}}
+        </span>
+      </div>
+    </ng-template>
     <mat-card-title>{{contactItem.name}}</mat-card-title>
     <mat-card-subtitle>{{contactItem.notes}}</mat-card-subtitle>
   </mat-card-header>
   <div class="contact-phone">
-    <img mat-card-avatar class="national-flag"
-      src="https://cdn-icons-png.flaticon.com/512/3909/3909370.png"
+    <img mat-card-avatar class="national-flag" src="https://cdn-icons-png.flaticon.com/512/3909/3909370.png"
       alt="Photo of a Shiba Inu">
     <mat-card-subtitle subtitle-text-size>{{contactItem.phone}}</mat-card-subtitle>
   </div>
@@ -16,6 +22,6 @@
     <button matMiniFab><mat-icon style="color: #72C6DF"> chat_bubble</mat-icon></button>
     <button matMiniFab><mat-icon style="color: #74C170">videocam</mat-icon></button>
     <button matMiniFab><mat-icon>more_vert</mat-icon></button>
-  </mat-card-actions>  
+  </mat-card-actions>
 </mat-card>
 <mat-divider></mat-divider>

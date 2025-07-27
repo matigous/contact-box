@@ -11,6 +11,6 @@ import { Contact } from '../../../../../shared/types/types';
 export class ListItem {
   @Input() contactItem: Contact = {} as Contact;
   show(id: string){
-    console.log(id)
+    console.log(this.contactItem.photo)
   }
 }
