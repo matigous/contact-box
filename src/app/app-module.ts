@@ -1,10 +1,10 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { NgModule, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Header } from './shared/components/header/header';
-import { ContactsModule } from './features/contacts/contacts-module'
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -14,10 +14,12 @@ import { ContactsModule } from './features/contacts/contacts-module'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ContactsModule
+    MatToolbarModule
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [App]
 })

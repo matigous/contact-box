@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ContactsService } from '../../../shared/services/contacts-service';
 import { Contact } from '../../../shared/types/types';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -10,11 +11,14 @@ import { Contact } from '../../../shared/types/types';
   styleUrl: './list.scss',
 })
 export class List {
-  public contacts: Contact[];
+  public contacts: Contact[] = [];
   contactsListFiltered: Contact[];;;
   contactsFilterOptions: any = "" //<--Essa propriedade vai recezer os valores do filtro. Precisa tipar
+  private destroy$ = new Subject<void>();
 
-  constructor(_contactsService: ContactsService) {
+
+
+  constructor(private _contactsService: ContactsService) {
     this.contacts = _contactsService.getContacts();
     this.contactsListFiltered = _contactsService.getContacts();
   }
@@ -22,6 +26,15 @@ export class List {
   ngOnInit(): void {
     console.log(this.contacts);
     this.onFilter(this.contactsFilterOptions)
+
+    this._contactsService.contacts$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(contacts => this.contacts = contacts);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onFilter(contactsOptions: any) {
@@ -37,5 +50,8 @@ export class List {
     })
 
     return this.contactsListFiltered = dataFiltered
+    //-----------------------------------
+
+
   }
 }
