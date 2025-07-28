@@ -1,0 +1,142 @@
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 4rem);
+  position: relative;
+
+  .card-content {
+    height: calc(100vh - 18rem);
+    overflow-y: auto;
+  }
+
+  .card-actions {
+    border-top: 1px solid #ddd;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    height: 4rem;
+  }
+}
+
+.container {
+  display: flex;
+  padding: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-info-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.contact-info-item {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.avatar {
+  border-radius: 50% !important;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.photo-url {
+  display: flex;
+  flex-grow: 1;
+}
+
+.social-network {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.go-back-icon {
+  margin-left: auto;
+  cursor: pointer;
+  position: absolute;
+  left: 1.5rem;
+  top: 0rem;
+}
+
+.go-back-icon-color {
+  color: orangered;
+}
+
+.favorite-icon {
+  margin-left: auto;
+  cursor: pointer;
+  position: absolute;
+  right: 1.5rem;
+  top: 0rem;
+}
+
+.favorite-icon-color {
+  color: #d32f2f;
+}
+
+.btns-editing-creating {
+  display: flex;
+  justify-content: end;
+}
+
+.btns-viewing {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-delete {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.btn-delete-color {
+  color: #d32f2f;
+}
+
+.btn-delete-confirming-color {
+  color: #f44336;
+}
+
+.social-icons-view {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.contact-not-found {
+  display: flex;
+  text-align: center;
+  font-size: large;
+  padding: 10rem;
+  margin: 5rem;
+  color: #d32f2f;
+}
+
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgba(191, 224, 247, 0.533);
+}

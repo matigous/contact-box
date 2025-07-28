@@ -4,10 +4,11 @@ import { List } from './list/list';
 import { Details } from './details/details';
 import { ListItem } from './list/components/list-item/list-item';
 import { Filter } from './list/components/filter/filter';
+import { DetailsModule } from './details/details-module';
 
 @NgModule({
-  declarations: [List, Details, ListItem, Filter],
-  imports: [CommonModule],
-  exports: [List, Details],
+  declarations: [List, ListItem, Filter],
+  imports: [CommonModule, DetailsModule],
+  exports: [List, DetailsModule],
 })
 export class ContactsModule { }
