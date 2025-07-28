@@ -1,0 +1,23 @@
+.list-container {
+  display: flex;
+  flex-direction: column;  
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.list-filter {
+  width: 90%;
+  height: 100px;
+  background-color: aqua;
+}
+
+.list-contacts {
+  width: 90%;
+  height: 100%; 
+  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

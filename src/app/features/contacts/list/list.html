@@ -1,9 +1,8 @@
-<div>list works!</div>
+<div class="list-container" >
+  <div class="list-filter">
 
-<ul>
-@for (contact of contacts; track contact.name) {
-<li>{{ contact.name }}</li>
-} @empty {
-<li>There are no items.</li>
-}
-</ul>
+  </div>
+  <div class="list-contacts" *ngFor="let contact of contactsListFiltered">
+    <app-list-item [contactItem]="contact"></app-list-item>
+  </div>
+</div>
