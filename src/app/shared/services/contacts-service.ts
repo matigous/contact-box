@@ -11,12 +11,11 @@ import { environment } from '../../../environments/environment';
 export class ContactsService {
   private readonly _apiUrl = environment.apiUrl;
   private readonly _url = this._apiUrl ? `${this._apiUrl}/contacts` : '';
-  private _http!: HttpClient;
   private _contactsSubject = new BehaviorSubject<Contact[]>([]);
   private _localContacts = contactsJson as Contact[];
   public contacts$ = this._contactsSubject.asObservable();
 
-  constructor(_http: HttpClient) {
+  constructor(private _http: HttpClient) {
     this.loadContacts();
   }
 

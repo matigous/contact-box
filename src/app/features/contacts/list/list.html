@@ -1,1 +1,9 @@
 <div>list works!</div>
+
+<ul>
+@for (contact of contacts; track contact.name) {
+<li>{{ contact.name }}</li>
+} @empty {
+<li>There are no items.</li>
+}
+</ul>
