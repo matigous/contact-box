@@ -1,5 +1,6 @@
 .detail-container{
   margin: 0 auto;
+  padding: 40px;
   width: 80%;
   height: 100%;
   overflow: hidden;
@@ -7,10 +8,10 @@
 
 .contact-card {
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   position: relative;
 
-  .card-content {    
+  .card-content {
     overflow-y: auto;
   }
 

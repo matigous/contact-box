@@ -74,6 +74,7 @@ export class Details implements OnInit {
         .pipe(takeUntil(this.destroy$))
         .subscribe((contact) => {
           this.contact = contact;
+
           if (!contact) {
             this.sendMessage(
               'You will be redirected to the contact list in 5 seconds',
@@ -125,6 +126,7 @@ export class Details implements OnInit {
 
   protected toogleEditPhotoUrl() {
     this.editingPhotoUrl = !this.editingPhotoUrl;
+
     setTimeout(() => {
       this.photoUrlInput?.nativeElement?.focus();
     }, 10);
@@ -140,7 +142,7 @@ export class Details implements OnInit {
     const contact = this.contactForm?.getRawValue();
 
     if (contact) {
-      this.apiService.updateContact(contact.id, contact);
+      this.apiService.updateContact(contact.id, contact).subscribe();
     }
   }
 
@@ -150,6 +152,7 @@ export class Details implements OnInit {
 
   protected onCancel() {
     this.mode = 'viewing';
+
     if (this.idContact) {
       this.getContactAndFillForms();
     }
@@ -161,7 +164,6 @@ export class Details implements OnInit {
       if (this.isCreating()) {
         this.apiService
           .addContact(contact)
-          .pipe(takeUntil(this.destroy$))
           .subscribe((newContact) => {
             this.mode = 'viewing';
             this.sendMessage('Contact added');
@@ -172,7 +174,6 @@ export class Details implements OnInit {
       if (this.isEditing()) {
         this.apiService
           .updateContact(contact.id, contact)
-          .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
             this.mode = 'viewing';
             this.sendMessage('Contact edited');
@@ -183,16 +184,19 @@ export class Details implements OnInit {
 
   onConfirmingDelete() {
     clearTimeout(this.timeoutConfirmingDelete);
+
     this.timeoutConfirmingDelete = setInterval(() => {
       if (this.confirmingDelete) this.confirmingDelete = false;
     }, 3000);
+
     this.confirmingDelete = true;
   }
 
   protected onDelete() {
     if (this.idContact) {
-      this.apiService.deleteContact(this.idContact);
+      this.apiService.deleteContact(this.idContact).subscribe();
       this.sendMessage('Contact deleted');
+
       setTimeout(() => {
         this.router.navigate(['/']);
       }, this.snackBarDuration);
