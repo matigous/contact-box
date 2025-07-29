@@ -1,10 +1,11 @@
 .app-header {
+  height: 10vh;
   mat-toolbar {
     background-color: var(--mat-sys-primary);
     border-radius: 0;
     color: var(--mat-sys-on-primary);
     padding: 0 40px;
-    height: 86px;
+    height: 100%;
   }
 
   img {
