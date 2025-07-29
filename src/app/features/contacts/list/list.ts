@@ -12,24 +12,24 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class List {
   public contacts: Contact[] = [];
-  contactsListFiltered: Contact[];;;
+  contactsListFiltered: Contact[] = [];
   contactsFilterOptions: any = "" //<--Essa propriedade vai recezer os valores do filtro. Precisa tipar
   private destroy$ = new Subject<void>();
 
 
 
-  constructor(private _contactsService: ContactsService) {
-    this.contacts = _contactsService.getContacts();
-    this.contactsListFiltered = _contactsService.getContacts();
-  }
+  constructor(private _contactsService: ContactsService) {}
 
-  ngOnInit(): void {
-    console.log(this.contacts);
-    this.onFilter(this.contactsFilterOptions)
-
+  ngOnInit(): void {    
     this._contactsService.contacts$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(contacts => this.contacts = contacts);
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(contacts => {
+      this.contacts = contacts
+      this.contactsListFiltered =  contacts;
+    });
+    
+    this.onFilter(this.contactsFilterOptions)
+    
   }
 
   ngOnDestroy(): void {
