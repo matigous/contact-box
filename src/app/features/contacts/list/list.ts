@@ -11,36 +11,29 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './list.scss',
 })
 export class List {
-  public contacts: Contact[] = [];
-  contactsListFiltered: Contact[] = [];
-  contactsFilterOptions: any = "" //<--Essa propriedade vai recezer os valores do filtro. Precisa tipar
   private destroy$ = new Subject<void>();
+  public contacts: Contact[] = [];
+  public contactsListFiltered: Contact[] = [];
+  public contactsFilterOptions: any = ""; //<--Essa propriedade vai recezer os valores do filtro. Precisa tipar
 
+  constructor(private _contactsService: ContactsService) { }
 
-
-  constructor(private _contactsService: ContactsService) {}
-
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this._contactsService.contacts$
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(contacts => {
-      this.contacts = contacts
-      this.contactsListFiltered =  contacts;
-    });
-    
-    this.onFilter(this.contactsFilterOptions)
-    
-  }
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(contacts => {
+        this.contacts = contacts
+        this.contactsListFiltered = contacts;
+      });
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.onFilter(this.contactsFilterOptions)
+
   }
 
   onFilter(contactsOptions: any) {
-
-    let dataFiltered: any[] = []
+    let dataFiltered: any[] = [];
     const filter = this.contactsFilterOptions.toLowerCase().trim();
+
     if (!filter) {
       return this.contactsListFiltered = this.contacts
     }
@@ -50,8 +43,10 @@ export class List {
     })
 
     return this.contactsListFiltered = dataFiltered
-    //-----------------------------------
+  }
 
-
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -12,7 +12,7 @@ export class ContactsService {
   private readonly _apiUrl = environment.apiUrl;
   private readonly _url = this._apiUrl ? `${this._apiUrl}/contacts` : '';
   private _contactsSubject = new BehaviorSubject<Contact[]>([]);
-  private _localContacts = contactsJson as Contact[];
+  private _localContacts!: Contact[];
   public contacts$ = this._contactsSubject.asObservable();
 
   constructor(private _http: HttpClient) {
@@ -27,6 +27,11 @@ export class ContactsService {
       });
     } else {
       console.warn('API URL não definida. Usando dados locais (mock).');
+
+      if (!this._localContacts) {
+        this._localContacts = contactsJson as Contact[];
+      }
+
       this._contactsSubject.next(this._localContacts);
     }
   }

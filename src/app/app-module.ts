@@ -5,7 +5,7 @@ import { App } from './app';
 import { Header } from './shared/components/header/header';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ContactsModule } from './features/contacts/contacts-module';
+import { ContactsModule } from './features/contacts/contacts-module'
 
 @NgModule({
   declarations: [

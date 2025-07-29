@@ -1,5 +1,5 @@
 <mat-card (click)="show(contactItem.id)" class="contact-container">
-  <mat-card-header>
+  <mat-card-header routerLink="/contact-details/{{contactItem.id}}">
     <img *ngIf="contactItem.photo; else noAvatar" mat-card-avatar src="{{contactItem.photo}}" alt="contact photo">
     <ng-template #noAvatar>
       <div mat-card-avatar class="no-avatar">
