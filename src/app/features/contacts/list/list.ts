@@ -21,7 +21,10 @@ export class List {
   ngOnInit(): void {
     this._contactsService.contacts$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(contacts => this.contacts = contacts);
+      .subscribe(contacts =>  {
+        this.contacts = contacts;
+        this.contactsListFiltered = contacts;
+      });
 
     this.onFilter(this.contactsFilterOptions)
   }
