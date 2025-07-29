@@ -31,6 +31,7 @@ export class List {
       });
 
     this.onFilter(this.contactsFilterOptions)
+
   }
 
   onFilter(contactsOptions: any) {
