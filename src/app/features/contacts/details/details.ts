@@ -8,10 +8,17 @@ import {
 import { ContactFormService } from '../../../shared/services/contact-form-service';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ContactsService } from '../../../shared/services/contacts-service';
-import { Contact, DetailsModeType } from '../../../shared/types/types';
+import {
+  AvailableSocialNetwork,
+  Contact,
+  DetailsModeType,
+  SocialNetwork,
+  SocialNetworkType,
+} from '../../../shared/types/types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { pipe, Subject, takeUntil, tap } from 'rxjs';
+import { SocialNetworksService } from '../../../shared/services/social-networks-service';
 
 @Component({
   selector: 'app-details',
@@ -22,16 +29,15 @@ import { pipe, Subject, takeUntil, tap } from 'rxjs';
 export class Details implements OnInit {
   private destroy$ = new Subject<void>();
 
-  //TODO:
-  // 1) Dropdown Type Social Network - Get from Api
-  // 2) Icons Social Network
-
-  protected formService = inject(ContactFormService);
-  protected apiService = inject(ContactsService);
-  protected activatedRoute = inject(ActivatedRoute);
-  protected router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  private formService = inject(ContactFormService);
+  private contactsService = inject(ContactsService);
+  private socialNetworksService = inject(SocialNetworksService);
+  private activatedRoute = inject(ActivatedRoute);
+  protected router = inject(Router);
 
+  protected enumSocialNetworks = SocialNetworkType;
+  protected availableSocialNetworks: AvailableSocialNetwork[] = [];
   protected contactForm?: FormGroup;
   protected idContact?: string;
   protected contact?: Contact;
@@ -39,27 +45,44 @@ export class Details implements OnInit {
   protected editingPhotoUrl = false;
   protected mode: DetailsModeType = 'creating';
   protected timeoutConfirmingDelete: any;
-  private snackBarDuration = 2000;
+  protected snackBarDuration = 2000;
 
   @ViewChild('photoUrlInput') photoUrlInput?: ElementRef<HTMLInputElement>;
 
   constructor() {
-    this.idContact = this.activatedRoute.snapshot.params['id'];
+    // Get Social Networks
+    this.socialNetworksService.availableSocialNetworks$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((sns) => {
+        this.availableSocialNetworks = sns;
+      });
+
+    // Get Reactive Form
     this.contactForm = this.formService.formGroup;
+
+    // Get Contact
+    this.getContactOrNewContact();
+  }
+
+  private getContactOrNewContact() {
+    this.idContact = this.activatedRoute.snapshot.params['id'];
     if (this.idContact) {
       this.mode = 'viewing';
       this.getContactAndFillForms();
       if (!this.contact) {
-        this.sendMessage('You will be redirected to the contact list in 5 seconds', undefined, 5000);
+        this.sendMessage(
+          'You will be redirected to the contact list in 5 seconds',
+          undefined,
+          5000
+        );
         setTimeout(() => {
           this.router.navigate(['/']);
         }, 5000);
       }
     }
-
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   protected isViewing(): boolean {
     return this.mode === 'viewing';
@@ -73,22 +96,32 @@ export class Details implements OnInit {
     return this.mode === 'creating';
   }
 
+  protected socialNetworksIcon(type: SocialNetworkType) {
+    return (
+      this.availableSocialNetworks.find((sn) => sn.type == type)?.iconUrl ?? ''
+    );
+  }
+
   private getContactAndFillForms() {
     if (this.idContact) {
-      this.apiService.getContactById(this.idContact)
+      this.contactsService
+        .getContactById(this.idContact)
         .pipe(takeUntil(this.destroy$))
-        .subscribe(contact => this.contact = contact);
+        .subscribe((contact) => (this.contact = contact));
       if (this.contact) {
         this.formService.fillForm(this.contact);
       }
     }
   }
 
-  sendMessage(message: string, action?: string, duration: number = this.snackBarDuration) {
+  sendMessage(
+    message: string,
+    action?: string,
+    duration: number = this.snackBarDuration
+  ) {
     this.snackBar.open(message, action, {
-      duration: duration
-    }
-    );
+      duration: duration,
+    });
   }
 
   protected get socialNetworksControls() {
@@ -102,6 +135,11 @@ export class Details implements OnInit {
     const digits = phone.replace(/\D/g, '');
     const link = `https://wa.me/${digits}`;
     window.open(link, '_blank');
+  }
+
+  protected openSocialNetwork(socialNetwork: SocialNetwork): void {
+    if (!socialNetwork) return;
+    window.open(socialNetwork.url, '_blank');
   }
 
   protected addSocialNetwork() {
@@ -131,7 +169,7 @@ export class Details implements OnInit {
     const contact = this.contactForm?.getRawValue();
 
     if (contact) {
-      this.apiService.updateContact(contact.id, contact);
+      this.contactsService.updateContact(contact.id, contact);
     }
   }
 
@@ -140,9 +178,11 @@ export class Details implements OnInit {
   }
 
   protected onCancel() {
-    this.mode = 'viewing';
     if (this.idContact) {
       this.getContactAndFillForms();
+      this.mode = 'viewing';
+    } else {
+      this.contactForm?.reset();
     }
   }
 
@@ -150,17 +190,19 @@ export class Details implements OnInit {
     if (this.contactForm?.valid) {
       let contact: Contact = this.contactForm?.getRawValue();
       if (this.isCreating()) {
-        this.apiService.addContact(contact)
+        this.contactsService
+          .addContact(contact)
           .pipe(takeUntil(this.destroy$))
           .subscribe((newContact) => {
             this.mode = 'viewing';
             this.sendMessage('Contact added');
-            this.router.navigate(['/contact-details/' + newContact.id])
+            this.router.navigate(['/contact-details/' + newContact.id]);
           });
       }
 
       if (this.isEditing()) {
-        this.apiService.updateContact(contact.id, contact)
+        this.contactsService
+          .updateContact(contact.id, contact)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
             this.mode = 'viewing';
@@ -180,12 +222,11 @@ export class Details implements OnInit {
 
   protected onDelete() {
     if (this.idContact) {
-      this.apiService.deleteContact(this.idContact);
+      this.contactsService.deleteContact(this.idContact);
       this.sendMessage('Contact deleted');
       setTimeout(() => {
         this.router.navigate(['/']);
       }, this.snackBarDuration);
-
     }
   }
 

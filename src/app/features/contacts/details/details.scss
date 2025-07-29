@@ -1,27 +1,27 @@
 .contact-card {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 10rem);
   position: relative;
+  width: 81%;
+  margin: 0 auto;
+  align-items: center;
 
   .card-content {
-    height: calc(100vh - 18rem);
+    height: calc(100vh - 24rem);
     overflow-y: auto;
   }
 
   .card-actions {
     border-top: 1px solid #ddd;
-    padding: 1rem;
     display: flex;
     justify-content: flex-end;
-    gap: 1rem;
     height: 4rem;
   }
-}
 
-.container {
-  display: flex;
-  padding: 2rem;
+  .mat-mdc-mini-fab {
+    background-color: transparent;
+  }
 }
 
 .contact-form {
@@ -34,7 +34,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  margin: 1rem;
+  margin: 0.4rem 2.5rem;
 }
 
 .contact-info-item {
@@ -58,6 +58,19 @@
   object-fit: cover;
 }
 
+.no-avatar-color {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3e7bee;
+}
+
+.letter-avatar {
+  color: white;
+  margin: 12px;
+  font-size: 50px;
+}
+
 .w-full {
   width: 100%;
 }
@@ -78,8 +91,8 @@
   margin-left: auto;
   cursor: pointer;
   position: absolute;
-  left: 1.5rem;
-  top: 0rem;
+  left: 0.4rem;
+  top: 0.4rem;
 }
 
 .go-back-icon-color {
@@ -90,17 +103,31 @@
   margin-left: auto;
   cursor: pointer;
   position: absolute;
-  right: 1.5rem;
-  top: 0rem;
+  right: 0.4rem;
+  top: 0.4rem;
 }
 
 .favorite-icon-color {
   color: #d32f2f;
 }
 
+.btn-whatsapp {
+  display: flex;
+  margin-right: 1rem;
+  align-items: center;
+  color: green;
+}
+
+.btns-social-network {
+  display: flex;
+  gap: 1rem;
+  margin-left: 1rem;
+}
+
 .btns-editing-creating {
   display: flex;
   justify-content: end;
+  gap: 1rem;
 }
 
 .btns-viewing {

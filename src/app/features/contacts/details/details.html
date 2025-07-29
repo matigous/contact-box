@@ -1,4 +1,9 @@
-<ng-container *ngIf="idContact === undefined || (idContact && contact); else contactNotFound">
+<ng-container
+  *ngIf="
+    idContact === undefined || (idContact && contact);
+    else contactNotFound
+  "
+>
   <ng-container *ngIf="contactForm">
     <mat-card class="contact-card">
       <form
@@ -8,23 +13,35 @@
       >
         <mat-card-header class="card-header">
           <!-- Seção: Avatar e Nome -->
+
+          <!-- TODO: Avaliar se src da <img> retornou imagem válida. -->
           <div class="contact-info-row w-full">
             <img
-              mat-card-image
+              *ngIf="contactForm.get('photo')?.value; else noAvatar"
+              mat-card-avatar
               class="avatar"
               [style.cursor]="!isViewing() ? 'pointer' : ''"
               [matTooltip]="
                 !isViewing() && !editingPhotoUrl ? 'Edit photo url' : ''
               "
-              [src]="
-                contactForm.get('photo')?.value ||
-                'https://ui-avatars.com/api/?name=' +
-                  (contactForm.get('name')?.value || 'User') +
-                  '&background=random&format=png'
-              "
+              [src]="contactForm.get('photo')?.value"
               alt="User Avatar"
               (click)="!isViewing() ? toogleEditPhotoUrl() : null"
             />
+            <ng-template #noAvatar>
+              <div mat-card-avatar 
+              class="no-avatar avatar no-avatar-color"
+              [style.cursor]="!isViewing() ? 'pointer' : ''"
+              (click)="!isViewing() ? toogleEditPhotoUrl() : null">
+                <span class="letter-avatar">
+                  {{
+                    contactForm.get("name")?.value
+                      ? contactForm.get("name")?.value.charAt(0).toUpperCase()
+                      : "A"
+                  }}
+                </span>
+              </div>
+            </ng-template>
 
             <div class="contact-info-item">
               <mat-form-field
@@ -53,7 +70,7 @@
 
               <!-- Back Navigation -->
               <button
-                mat-icon-button
+                matMiniFab
                 class="go-back-icon"
                 (click)="router.navigate(['/'])"
                 matTooltip="Go back to list"
@@ -64,7 +81,7 @@
 
               <!-- Favorite Toggle -->
               <button
-                mat-icon-button
+                matMiniFab
                 class="favorite-icon"
                 (click)="toggleFavorite()"
                 [matTooltip]="
@@ -122,15 +139,25 @@
                 [readonly]="isViewing()"
                 placeholder="+55 11 91234-5678"
               />
+              <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
+                Phone is required.
+              </mat-error>
+              <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern')">
+                Must be a valid Phone. Ex: +55 11 91234-5678
+              </mat-error>
               <button
-                mat-icon-button
+                matMiniFab
                 matSuffix
                 matTooltip="Open in Whatsapp"
                 type="button"
-                [style.color]="'green'"
+                class="btn-whatsapp"
                 (click)="openWhatsapp(contactForm.get('phone')?.value)"
               >
-                <mat-icon>chat</mat-icon>
+                <img
+                  [src]="socialNetworksIcon(enumSocialNetworks.WhatsApp)"
+                  width="40px"
+                  height="40px"
+                />
               </button>
             </mat-form-field>
 
@@ -170,15 +197,18 @@
               <div *ngIf="sns.length" class="social-icons w-full">
                 <div class="contact-info-item">
                   <mat-label>Social Networks</mat-label>
-                  <a
-                    *ngFor="let sn of sns"
-                    [href]="sn.url"
-                    target="_blank"
-                    style="margin-left: 1rem"
-                    [matTooltip]="'Open profile in ' + sn.type"
-                  >
-                    <mat-icon>{{ sn.type[0] }}</mat-icon>
-                  </a>
+                  <div class="btns-social-network">
+                    <ng-container *ngFor="let sn of sns">
+                      <img
+                        *ngIf="sn.type"
+                        style="cursor: pointer"
+                        (click)="openSocialNetwork(sn)"
+                        [src]="socialNetworksIcon(sn.type)"
+                        width="40px"
+                        height="40px"
+                      />
+                    </ng-container>
+                  </div>
                 </div>
               </div>
             </ng-container>
@@ -196,10 +226,18 @@
                 <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'">
                   <mat-label>Type</mat-label>
                   <mat-select formControlName="type">
-                    <mat-option value="Facebook">Facebook</mat-option>
-                    <mat-option value="Instagram">Instagram</mat-option>
-                    <mat-option value="Twitter">Twitter</mat-option>
-                    <mat-option value="LinkedIn">LinkedIn</mat-option>
+                    <mat-option
+                      *ngFor="let sn of availableSocialNetworks"
+                      [value]="sn.type"
+                    >
+                      <img
+                        [src]="sn.iconUrl"
+                        width="20"
+                        height="20"
+                        style="vertical-align: middle; margin-right: 8px"
+                      />
+                      {{ sn.type }}
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
 
@@ -222,7 +260,7 @@
                 </mat-form-field>
 
                 <button
-                  mat-icon-button
+                  matMiniFab
                   color="warn"
                   (click)="removeSocialNetwork(i)"
                   type="button"
@@ -236,9 +274,10 @@
                 mat-stroked-button
                 color="primary"
                 type="button"
+                matTooltip="Add New Social Network"
                 (click)="addSocialNetwork()"
               >
-                Add Social Network
+                <mat-icon>add</mat-icon> Social Network
               </button>
             </div>
           </div>
@@ -248,7 +287,7 @@
         <mat-card-actions class="card-actions">
           <div *ngIf="!isViewing()" class="w-full btns-editing-creating">
             <button
-              mat-icon-button
+              matMiniFab
               color="warn"
               type="button"
               matTooltip="Cancel"
@@ -257,11 +296,13 @@
               <mat-icon style="color: #f44336">cancel</mat-icon>
             </button>
             <button
-              mat-icon-button
+              matMiniFab
               color="primary"
               type="submit"
               [disabled]="contactForm.invalid"
-              matTooltip="Save"
+              [matTooltip]="
+                contactForm.invalid ? 'Review required fields to save' : 'Save'
+              "
             >
               <mat-icon style="color: #4caf50">save</mat-icon>
             </button>
@@ -270,7 +311,7 @@
           <div *ngIf="isViewing()" class="w-full btns-viewing">
             <div class="btn-delete">
               <button
-                mat-icon-button
+                matMiniFab
                 color="primary"
                 type="button"
                 matTooltip="{{
@@ -294,7 +335,7 @@
             </div>
 
             <button
-              mat-icon-button
+              matMiniFab
               color="primary"
               type="button"
               matTooltip="Edit"

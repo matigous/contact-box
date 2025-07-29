@@ -52,8 +52,8 @@ export class ContactsService {
       );
     } else {
       const newContact: Contact = {
-        id: Date.now().toString(),
         ...contact,
+        id: Date.now().toString(),
       };
       this._localContacts.push(newContact);
       this._contactsSubject.next([...this._localContacts]);

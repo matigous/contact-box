@@ -14,6 +14,11 @@ export interface SocialNetwork {
   url: string;
 }
 
+export interface AvailableSocialNetwork {
+  type: SocialNetworkType;
+  iconUrl: string;
+}
+
 export enum SocialNetworkType {
   Facebook = 'Facebook',
   Instagram = 'Instagram',
