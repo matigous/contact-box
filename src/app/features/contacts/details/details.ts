@@ -46,20 +46,14 @@ export class Details implements OnInit {
   constructor() {
     this.idContact = this.activatedRoute.snapshot.params['id'];
     this.contactForm = this.formService.formGroup;
+  }
+
+  ngOnInit(): void {
     if (this.idContact) {
       this.mode = 'viewing';
       this.getContactAndFillForms();
-      if (!this.contact) {
-        this.sendMessage('You will be redirected to the contact list in 5 seconds', undefined, 5000);
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 5000);
-      }
     }
-
   }
-
-  ngOnInit(): void { }
 
   protected isViewing(): boolean {
     return this.mode === 'viewing';
@@ -75,20 +69,35 @@ export class Details implements OnInit {
 
   private getContactAndFillForms() {
     if (this.idContact) {
-      this.apiService.getContactById(this.idContact)
+      this.apiService
+        .getContactById(this.idContact)
         .pipe(takeUntil(this.destroy$))
-        .subscribe(contact => this.contact = contact);
-      if (this.contact) {
-        this.formService.fillForm(this.contact);
-      }
+        .subscribe((contact) => {
+          this.contact = contact;
+          if (!contact) {
+            this.sendMessage(
+              'You will be redirected to the contact list in 5 seconds',
+              undefined,
+              5000
+            );
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 5000);
+          } else {
+            this.formService.fillForm(this.contact);
+          }
+        });
     }
   }
 
-  sendMessage(message: string, action?: string, duration: number = this.snackBarDuration) {
+  sendMessage(
+    message: string,
+    action?: string,
+    duration: number = this.snackBarDuration
+  ) {
     this.snackBar.open(message, action, {
-      duration: duration
-    }
-    );
+      duration: duration,
+    });
   }
 
   protected get socialNetworksControls() {
@@ -150,17 +159,19 @@ export class Details implements OnInit {
     if (this.contactForm?.valid) {
       let contact: Contact = this.contactForm?.getRawValue();
       if (this.isCreating()) {
-        this.apiService.addContact(contact)
+        this.apiService
+          .addContact(contact)
           .pipe(takeUntil(this.destroy$))
           .subscribe((newContact) => {
             this.mode = 'viewing';
             this.sendMessage('Contact added');
-            this.router.navigate(['/contact-details/' + newContact.id])
+            this.router.navigate(['/contact-details/' + newContact.id]);
           });
       }
 
       if (this.isEditing()) {
-        this.apiService.updateContact(contact.id, contact)
+        this.apiService
+          .updateContact(contact.id, contact)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
             this.mode = 'viewing';
@@ -185,7 +196,6 @@ export class Details implements OnInit {
       setTimeout(() => {
         this.router.navigate(['/']);
       }, this.snackBarDuration);
-
     }
   }
 
