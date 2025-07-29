@@ -11,12 +11,16 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './list.scss',
 })
 export class List {
-  private destroy$ = new Subject<void>();
   public contacts: Contact[] = [];
-  public contactsListFiltered: Contact[] = [];
-  public contactsFilterOptions: any = ""; //<--Essa propriedade vai recezer os valores do filtro. Precisa tipar
+  contactsListFiltered: Contact[];;;
+  contactsFilterOptions: any = "" //<--Essa propriedade vai recezer os valores do filtro. Precisa tipar
+  private destroy$ = new Subject<void>();
+  
 
-  constructor(private _contactsService: ContactsService) { }
+  constructor(private _contactsService: ContactsService) {
+    this.contacts = _contactsService.getContacts();
+    this.contactsListFiltered = _contactsService.getContacts();
+  }
 
   ngOnInit(): void {
     this._contactsService.contacts$
