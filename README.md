@@ -1,6 +1,6 @@
 # ContactBox
 
-Projeto de lista de contatos do curso ada caixaverso
+Projeto de lista de contatos do curso ada caixaverso GRUPO 4.
 
 ## Development server
 
