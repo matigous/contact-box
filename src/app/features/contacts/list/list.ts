@@ -3,7 +3,6 @@ import { ContactsService } from '../../../shared/services/contacts-service';
 import { Contact } from '../../../shared/types/types';
 import { Subject, takeUntil } from 'rxjs';
 
-
 @Component({
   selector: 'app-list',
   standalone: false,
@@ -12,10 +11,9 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class List {
   public contacts: Contact[] = [];
-  contactsListFiltered: Contact[];;;
-  contactsFilterOptions: any = "" //<--Essa propriedade vai recezer os valores do filtro. Precisa tipar
+  contactsListFiltered: Contact[] = [];
+  contactsFilterOptions: String = '';
   private destroy$ = new Subject<void>();
-  
 
   constructor(private _contactsService: ContactsService) {
     this.contacts = _contactsService.getContacts();
@@ -25,13 +23,17 @@ export class List {
   ngOnInit(): void {
     this._contactsService.contacts$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(contacts =>  {
+      .subscribe((contacts) => {
         this.contacts = contacts;
         this.contactsListFiltered = contacts;
       });
 
-    this.onFilter(this.contactsFilterOptions)
+    this.onFilter(this.contactsFilterOptions);
+  }
 
+  updateFilter(filter: string) {
+    this.contactsFilterOptions = filter;
+    this.onFilter(this.contactsFilterOptions);
   }
 
   onFilter(contactsOptions: any) {
@@ -39,14 +41,14 @@ export class List {
     const filter = this.contactsFilterOptions.toLowerCase().trim();
 
     if (!filter) {
-      return this.contactsListFiltered = this.contacts
+      return (this.contactsListFiltered = this.contacts);
     }
 
     dataFiltered = this.contacts.filter((contact) => {
-      return contact.name.toLocaleLowerCase().includes(filter)
-    })
+      return contact.name.toLocaleLowerCase().includes(filter);
+    });
 
-    return this.contactsListFiltered = dataFiltered
+    return (this.contactsListFiltered = dataFiltered);
   }
 
     protected onDelete(idContact: string) {

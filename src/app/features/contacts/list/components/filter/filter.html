@@ -1,1 +1,4 @@
-<p>filter works!</p>
+<div class="filter-container">
+    <input type="text" [(ngModel)]="filterText" (ngModelChange)="emitFilter()" placeholder="Filter contacts..." />
+    <button routerLink='/contact-details/'>Adicionar Novo</button>
+</div>
