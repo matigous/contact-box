@@ -8,7 +8,11 @@ import {
 import { ContactFormService } from '../../../shared/services/contact-form-service';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ContactsService } from '../../../shared/services/contacts-service';
-import { Contact, DetailsModeType, SocialNetworkIcon } from '../../../shared/types/types';
+import {
+  Contact,
+  DetailsModeType,
+  SocialNetworkIcon,
+} from '../../../shared/types/types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { pipe, Subject, takeUntil, tap } from 'rxjs';
@@ -21,10 +25,6 @@ import { pipe, Subject, takeUntil, tap } from 'rxjs';
 })
 export class Details implements OnInit {
   private destroy$ = new Subject<void>();
-
-  //TODO:
-  // 1) Dropdown Type Social Network - Get from Api
-  // 2) Icons Social Network
 
   protected formService = inject(ContactFormService);
   protected apiService = inject(ContactsService);
@@ -162,22 +162,19 @@ export class Details implements OnInit {
     if (this.contactForm?.valid) {
       let contact: Contact = this.contactForm?.getRawValue();
       if (this.isCreating()) {
-        this.apiService
-          .addContact(contact)
-          .subscribe((newContact) => {
-            this.mode = 'viewing';
-            this.sendMessage('Contact added');
-            this.router.navigate(['/contact-details/' + newContact.id]);
-          });
+        contact.id = Date.now().toString();
+        this.apiService.addContact(contact).subscribe((newContact) => {
+          this.mode = 'viewing';
+          this.sendMessage('Contact added');
+          this.router.navigate(['/contact-details/' + newContact.id]);
+        });
       }
 
       if (this.isEditing()) {
-        this.apiService
-          .updateContact(contact.id, contact)
-          .subscribe(() => {
-            this.mode = 'viewing';
-            this.sendMessage('Contact edited');
-          });
+        this.apiService.updateContact(contact.id, contact).subscribe(() => {
+          this.mode = 'viewing';
+          this.sendMessage('Contact edited');
+        });
       }
     }
   }
@@ -204,7 +201,7 @@ export class Details implements OnInit {
   }
 
   getIcon(icon: string) {
-    return SocialNetworkIcon[icon as keyof typeof SocialNetworkIcon]
+    return SocialNetworkIcon[icon as keyof typeof SocialNetworkIcon];
   }
 
   ngOnDestroy(): void {
