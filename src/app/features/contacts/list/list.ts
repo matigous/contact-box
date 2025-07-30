@@ -49,6 +49,13 @@ export class List {
     return this.contactsListFiltered = dataFiltered
   }
 
+    protected onDelete(idContact: string) {
+    if (idContact) {
+      this._contactsService.deleteContact(idContact).subscribe();    
+    }
+  }
+
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

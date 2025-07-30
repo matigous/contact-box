@@ -73,7 +73,7 @@
                 <input matInput formControlName="phone" [readonly]="isViewing()" placeholder="+55 11 91234-5678" />
                 <button mat-icon-button matSuffix matTooltip="Open in Whatsapp" type="button" [style.color]="'green'"
                   (click)="openWhatsapp(contactForm.get('phone')?.value)">
-                  <mat-icon>chat</mat-icon>
+                  <mat-icon style="color: #232323">chat</mat-icon>
                 </button>
               </mat-form-field>
 
@@ -99,7 +99,7 @@
                     <mat-label>Social Networks</mat-label>
                     <a *ngFor="let sn of sns" [href]="sn.url" target="_blank" style="margin-left: 1rem"
                       [matTooltip]="'Open profile in ' + sn.type">
-                      <mat-icon>{{ sn.type[0] }}</mat-icon>
+                      <img class="icon-social-network" [src]="getIcon(sn.type)">
                     </a>
                   </div>
                 </div>
@@ -113,7 +113,7 @@
                     <mat-select formControlName="type">
                       <mat-option value="Facebook">Facebook</mat-option>
                       <mat-option value="Instagram">Instagram</mat-option>
-                      <mat-option value="Twitter">Twitter</mat-option>
+                      <mat-option value="GitHub">GitHub</mat-option>
                       <mat-option value="LinkedIn">LinkedIn</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -131,7 +131,7 @@
 
                   <button mat-icon-button color="warn" (click)="removeSocialNetwork(i)" type="button"
                     matTooltip="Delete Social Network">
-                    <mat-icon class="btn-delete-color">delete</mat-icon>
+                    <mat-icon style="color: #232323" class="btn-delete-color">delete</mat-icon>
                   </button>
                 </div>
 
@@ -149,16 +149,16 @@
                 <mat-icon style="color: #f44336">cancel</mat-icon>
               </button>
               <button mat-icon-button color="primary" type="submit" [disabled]="contactForm.invalid" matTooltip="Save">
-                <mat-icon style="color: #4caf50">save</mat-icon>
+                <mat-icon style="color: #575757">save</mat-icon>
               </button>
             </div>
 
             <div *ngIf="isViewing()" class="w-full btns-viewing">
               <div class="btn-delete">
-                <button mat-icon-button color="primary" type="button" matTooltip="{{
+                <button  mat-icon-button color="primary" type="button" matTooltip="{{
                     confirmingDelete ? 'Confirm delete' : 'Delete'
                   }}" (click)="confirmingDelete ? onDelete() : onConfirmingDelete()">
-                  <mat-icon [class.btn-delete-color]="!confirmingDelete"
+                  <mat-icon style="color: #232323" [class.btn-delete-color]="!confirmingDelete"
                     [class.btn-delete-confirming-color]="confirmingDelete">
                     {{ confirmingDelete ? "check" : "delete" }}
                   </mat-icon>
@@ -169,7 +169,7 @@
               </div>
 
               <button mat-icon-button color="primary" type="button" matTooltip="Edit" (click)="onEdit()">
-                <mat-icon style="color: #1976d2">edit</mat-icon>
+                <mat-icon style="color: #232323">edit</mat-icon>
               </button>
             </div>
           </mat-card-actions>
