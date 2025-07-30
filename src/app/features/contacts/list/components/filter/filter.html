@@ -1,4 +1,7 @@
 <div class="filter-container">
-    <input type="text" [(ngModel)]="filterText" (ngModelChange)="emitFilter()" placeholder="Filter contacts..." />
+    <mat-form-field class="filter-input" appearance='outline'>
+      <input matInput type="text" [(ngModel)]="filterText" (ngModelChange)="emitFilter()" placeholder="Filter contacts..." />
+       <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
     <button routerLink='/contact-details/'>Adicionar Novo</button>
 </div>

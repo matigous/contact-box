@@ -11,6 +11,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MatFormField, MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [List, ListItem, Filter],
@@ -22,8 +24,11 @@ import { FormsModule } from '@angular/forms';
     MatDividerModule,
     MatMenuModule,
     RouterLink,
+    MatFormField,
     FormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [List, DetailsModule],
 })
-export class ContactsModule {}
+export class ContactsModule { }
