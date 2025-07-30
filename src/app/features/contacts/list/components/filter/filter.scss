@@ -1,41 +1,31 @@
 .filter-container {
   display: flex;
   align-items: center;
-  height: 100%;
+  padding: 16px 0;
   width: 100%;
+  flex: 1;
   gap: 1rem;
   font-family: --mat-sys-title-large-font;
-
-  // input[type="text"] {
-  //   flex: 1 1 0;
-  //   height: 48px;
-  //   font-size: 1.1rem;
-  //   padding: 0 1rem;
-  //   border-radius: 24px;
-  //   border: 1px solid #ccc;
-  // }
 
   .filter-input {
     display: flex;
     align-items: center;
-    flex: 1 1 0;
-    height: 48px;
+    flex: 1;
     font-size: 1.1rem;
-    padding: 0 1rem;
     border-radius: 24px;
-
-    input[type="text"] {
-      outline: 1px solid #ccc;
-    }
+    height: 100%;
   }
 
   button {
-    height: 48px;
+    display: flex;
+    align-self: flex-start;
+    height: 100%;
+    margin-top: 2px;
     box-sizing: border-box;
     font-size: 1.1rem;
     border-radius: 40px;
     border: none;
-    padding: 0 32px;
+    padding: 16px 32px;
     font-weight: 600;
     background: #1976d2;
     color: #fff;
