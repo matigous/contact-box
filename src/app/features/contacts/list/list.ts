@@ -24,8 +24,8 @@ export class List {
     this._contactsService.contacts$
       .pipe(takeUntil(this.destroy$))
       .subscribe((contacts) => {
-        this.contacts = contacts;
-        this.contactsListFiltered = contacts;
+        this.contacts = this.sortContacts(contacts);
+        this.contactsListFiltered = this.sortContacts(contacts);
       });
 
     this.onFilter(this.contactsFilterOptions);
@@ -51,12 +51,16 @@ export class List {
     return (this.contactsListFiltered = dataFiltered);
   }
 
-    protected onDelete(idContact: string) {
+  protected onDelete(idContact: string) {
     if (idContact) {
-      this._contactsService.deleteContact(idContact).subscribe();    
+      this._contactsService.deleteContact(idContact).subscribe();
     }
   }
-
+  private sortContacts(contacts: Contact[]): Contact[] {
+    return [...contacts].sort((a, b) =>
+      a.name.localeCompare(b.name, 'pt-BR', { sensitivity: 'base' })
+    );
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
