@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 90vh;
+  height: 92dvh;  
   margin: 0 auto;
   align-items: center;
 }
@@ -12,12 +12,14 @@
   width: 100%;
 }
 
-.list-contacts {
+.list-contacts {  
   width: 100%;
   height: 90%;
+  padding-right: 10px;
   overflow-y: scroll;
   display: flex;
-  flex-direction: column;
-  scrollbar-color: #ffffff #aaaaaa;
+  flex-direction: column; 
+  scrollbar-color: #818181 #ffffff; 
   scrollbar-width: thin;
+  gap: 8px;
 }

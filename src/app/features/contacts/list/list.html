@@ -4,7 +4,7 @@
   </div>
   <div class="list-contacts">
     <div *ngFor="let contact of contactsListFiltered">
-      <app-list-item [contactItem]="contact"></app-list-item>
+      <app-list-item [contactItem]="contact" (onDelete)="onDelete($event)"></app-list-item>
     </div>
   </div>
 </div>

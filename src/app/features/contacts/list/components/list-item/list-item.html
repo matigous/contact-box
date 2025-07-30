@@ -18,9 +18,9 @@
   </div>
 
   <mat-card-actions>
-    <button matMiniFab disabled><mat-icon style="color: #C19EC9;" > phone</mat-icon></button>
-    <button matMiniFab disabled><mat-icon style="color: #72C6DF" > chat_bubble</mat-icon></button>
-    <button matMiniFab disabled><mat-icon style="color: #74C170" > videocam</mat-icon></button>
+    <button matMiniFab ><mat-icon style="color: #C19EC9;" > phone</mat-icon></button>
+    <button matMiniFab ><mat-icon style="color: #72C6DF" > chat_bubble</mat-icon></button>
+    <button matMiniFab ><mat-icon style="color: #74C170" > videocam</mat-icon></button>
     <button matMiniFab [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -29,11 +29,10 @@
         <mat-icon>edit</mat-icon>
         <span>Editar</span>
       </button>
-      <button mat-menu-item disabled>
+      <button mat-menu-item (click)="onDelete.emit(this.contactItem.id)">
         <mat-icon>delete_outline</mat-icon>
         <span>Deletar</span>
       </button>
     </mat-menu>
   </mat-card-actions>
 </mat-card>
-<mat-divider></mat-divider>

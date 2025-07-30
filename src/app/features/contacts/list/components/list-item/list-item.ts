@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { Contact } from '../../../../../shared/types/types';
 
 @Component({
@@ -13,4 +13,6 @@ export class ListItem {
   show(id: string){
     console.log(this.contactItem.photo)
   }
+  @Output() onDelete = new EventEmitter()
+
 }

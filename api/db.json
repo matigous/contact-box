@@ -1,38 +1,6 @@
 {
   "contacts": [
     {
-      "id": "1",
-      "name": "Alice Mendes",
-      "phone": "+55 11 91234-5678",
-      "email": "alice.mendes@example.com",
-      "fav": true,
-      "photo": "https://randomuser.me/api/portraits/women/1.jpg",
-      "notes": "Amiga da faculdade.",
-      "socialNetworks": [
-        {
-          "type": "Instagram",
-          "url": "https://instagram.com/alicemendes"
-        },
-        {
-          "type": "LinkedIn",
-          "url": "https://linkedin.com/in/alicemendes"
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Bruno Carvalho",
-      "phone": "+55 21 99876-5432",
-      "fav": false,
-      "email": "bruno.carvalho@example.com",
-      "socialNetworks": [
-        {
-          "type": "GitHub",
-          "url": "https://github.com/brunocarvalho"
-        }
-      ]
-    },
-    {
       "id": "3",
       "name": "Carla Souza",
       "phone": "+55 31 98765-4321",
