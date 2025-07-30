@@ -11,21 +11,27 @@
     <mat-card-title>{{contactItem.name}}</mat-card-title>
     <mat-card-subtitle>{{contactItem.notes}}</mat-card-subtitle>
   </mat-card-header>
-  <div class="contact-phone">
+  <div *ngIf="contactItem.phone; else showEmail" class="contact-phone">
     <img mat-card-avatar class="national-flag" src="https://cdn-icons-png.flaticon.com/512/3909/3909370.png"
-      alt="Photo of a Shiba Inu">
+      alt="Phone icon">
     <mat-card-subtitle subtitle-text-size>{{contactItem.phone}}</mat-card-subtitle>
   </div>
+  <ng-template #showEmail>
+    <div class="contact-phone">
+      <mat-icon>email</mat-icon>
+      <mat-card-subtitle subtitle-text-size>{{contactItem.email}}</mat-card-subtitle>
+    </div>
+  </ng-template>
 
   <mat-card-actions>
-    <button matMiniFab ><mat-icon style="color: #C19EC9;" > phone</mat-icon></button>
-    <button matMiniFab ><mat-icon style="color: #72C6DF" > chat_bubble</mat-icon></button>
-    <button matMiniFab ><mat-icon style="color: #74C170" > videocam</mat-icon></button>
+    <button matMiniFab><mat-icon style="color: #C19EC9;"> phone</mat-icon></button>
+    <button matMiniFab><mat-icon style="color: #72C6DF"> chat_bubble</mat-icon></button>
+    <button matMiniFab><mat-icon style="color: #74C170"> videocam</mat-icon></button>
     <button matMiniFab [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
-    <mat-menu #menu="matMenu" >
-      <button mat-menu-item  routerLink="/contact-details/{{contactItem.id}}">
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/contact-details/{{contactItem.id}}">
         <mat-icon>edit</mat-icon>
         <span>Editar</span>
       </button>
