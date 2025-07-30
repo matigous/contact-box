@@ -1,18 +1,21 @@
 .app-header {
-  height: 10vh;
-  mat-toolbar {
+  height: 8vh;
+  
+  mat-toolbar {    
+    display: flex;    
     background-color: var(--mat-sys-primary);
     border-radius: 0;
     color: var(--mat-sys-on-primary);
-    padding: 0 40px;
-    height: 100%;
+    padding: 0 10px;
+    height: 100%;   
   }
 
   img {
     height: 86px;
   }
 
-  h1 {
-    margin-left: 30%;
+  h1 {    
+    display: block;
+    margin-right: 50%;
   }
 }

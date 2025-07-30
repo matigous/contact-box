@@ -2,18 +2,27 @@
   margin: 0 auto;
   padding: 40px;
   width: 80%;
+  max-width: 900px;
   height: 100%;
   overflow: hidden;
 }
 
 .contact-card {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   position: relative;
+  
 
   .card-content {
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
+
+  form {
+    gap: 10px;
+  }  
 
   .card-actions {
     border-top: 1px solid #ddd;
@@ -84,12 +93,12 @@
   margin-left: auto;
   cursor: pointer;
   position: absolute;
-  left: 1.5rem;
+  left: 0.5rem;
   top: 0rem;
 }
 
 .go-back-icon-color {
-  color: orangered;
+  color: #000000;  
 }
 
 .favorite-icon {
@@ -145,4 +154,7 @@
 
 :host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: rgba(191, 224, 247, 0.533);
+}
+.icon-social-network{
+  width: 24px;
 }

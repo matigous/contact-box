@@ -8,7 +8,7 @@ import {
 import { ContactFormService } from '../../../shared/services/contact-form-service';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ContactsService } from '../../../shared/services/contacts-service';
-import { Contact, DetailsModeType } from '../../../shared/types/types';
+import { Contact, DetailsModeType, SocialNetworkIcon } from '../../../shared/types/types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { pipe, Subject, takeUntil, tap } from 'rxjs';
@@ -201,6 +201,10 @@ export class Details implements OnInit {
         this.router.navigate(['/']);
       }, this.snackBarDuration);
     }
+  }
+
+  getIcon(icon: string) {
+    return SocialNetworkIcon[icon as keyof typeof SocialNetworkIcon]
   }
 
   ngOnDestroy(): void {
