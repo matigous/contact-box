@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Contact } from '../types/types';
+import { Contact } from '../models/contact-model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { Contact } from '../../../../../shared/types/types';
+import { Contact } from '../../../../../shared/models/contact-model';
 
 @Component({
   selector: 'app-list-item',

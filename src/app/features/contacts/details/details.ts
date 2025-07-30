@@ -11,11 +11,11 @@ import { ContactsService } from '../../../shared/services/contacts-service';
 import {
   Contact,
   DetailsModeType,
-  SocialNetworkIcon,
-} from '../../../shared/types/types';
+} from '../../../shared/models/contact-model';
+import { SocialNetworkIcon } from '../../../shared/models/social-network-model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { pipe, Subject, takeUntil, tap } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-details',
