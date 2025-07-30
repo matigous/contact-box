@@ -210,5 +210,6 @@ export class Details implements OnInit {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.formService.formGroup?.reset();
   }
 }
