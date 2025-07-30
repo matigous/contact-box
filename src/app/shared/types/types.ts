@@ -13,6 +13,7 @@ export interface SocialNetwork {
   type: SocialNetworkType;
   url: string;
 }
+
 export enum SocialNetworkIcon {
   Facebook = '/assets/icons/facebook-50.png',
   Instagram = '/assets/icons/instagram-50.png',
