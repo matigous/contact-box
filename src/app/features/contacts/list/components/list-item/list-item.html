@@ -1,5 +1,5 @@
 <mat-card (click)="show(contactItem.id)" class="contact-container">
-  <mat-card-header routerLink="/contact-details/{{contactItem.id}}">
+  <mat-card-header>
     <img *ngIf="contactItem.photo; else noAvatar" mat-card-avatar src="{{contactItem.photo}}" alt="contact photo">
     <ng-template #noAvatar>
       <div mat-card-avatar class="no-avatar">
@@ -21,11 +21,11 @@
     <button matMiniFab disabled><mat-icon style="color: #C19EC9;" > phone</mat-icon></button>
     <button matMiniFab disabled><mat-icon style="color: #72C6DF" > chat_bubble</mat-icon></button>
     <button matMiniFab disabled><mat-icon style="color: #74C170" > videocam</mat-icon></button>
-    <button matMiniFab [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" disabled>
+    <button matMiniFab [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu" >
-      <button mat-menu-item>
+      <button mat-menu-item  routerLink="/contact-details/{{contactItem.id}}">
         <mat-icon>edit</mat-icon>
         <span>Editar</span>
       </button>

@@ -1,11 +1,17 @@
+.detail-container{
+  margin: 0 auto;
+  padding: 40px;
+  width: 80%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .contact-card {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 4rem);
   position: relative;
 
   .card-content {
-    height: calc(100vh - 18rem);
     overflow-y: auto;
   }
 

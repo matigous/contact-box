@@ -10,17 +10,23 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './list.scss',
 })
 export class List {
-  private destroy$ = new Subject<void>();
   public contacts: Contact[] = [];
-  public contactsListFiltered: Contact[] = [];
-  public contactsFilterOptions: String = ''; //<--Essa propriedade vai recezer os valores do filtro. Precisa tipar
+  contactsListFiltered: Contact[] = [];
+  contactsFilterOptions: String = '';
+  private destroy$ = new Subject<void>();
 
-  constructor(private _contactsService: ContactsService) {}
+  constructor(private _contactsService: ContactsService) {
+    this.contacts = _contactsService.getContacts();
+    this.contactsListFiltered = _contactsService.getContacts();
+  }
 
   ngOnInit(): void {
     this._contactsService.contacts$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((contacts) => (this.contacts = contacts));
+      .subscribe((contacts) => {
+        this.contacts = contacts;
+        this.contactsListFiltered = contacts;
+      });
 
     this.onFilter(this.contactsFilterOptions);
   }
