@@ -1,4 +1,4 @@
-.detail-container{
+.detail-container {
   margin: 0 auto;
   padding: 40px;
   width: 80%;
@@ -12,7 +12,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  
 
   .card-content {
     overflow-y: auto;
@@ -22,7 +21,7 @@
 
   form {
     gap: 10px;
-  }  
+  }
 
   .card-actions {
     border-top: 1px solid #ddd;
@@ -98,7 +97,7 @@
 }
 
 .go-back-icon-color {
-  color: #000000;  
+  color: #000000;
 }
 
 .favorite-icon {
@@ -155,6 +154,16 @@
 :host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: rgba(191, 224, 247, 0.533);
 }
-.icon-social-network{
+.icon-social-network {
   width: 24px;
+}
+.save-button {
+  color: #1976d2;
+}
+
+button[disabled] .save-button {
+  color: #575757;
+}
+.contact-not-found {
+  font-size: 3rem;
 }

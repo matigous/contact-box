@@ -149,13 +149,13 @@
                 <mat-icon style="color: #f44336">cancel</mat-icon>
               </button>
               <button mat-icon-button color="primary" type="submit" [disabled]="contactForm.invalid" matTooltip="Save">
-                <mat-icon style="color: #575757">save</mat-icon>
+                <mat-icon class="save-button">save</mat-icon>
               </button>
             </div>
 
             <div *ngIf="isViewing()" class="w-full btns-viewing">
               <div class="btn-delete">
-                <button  mat-icon-button color="primary" type="button" matTooltip="{{
+                <button mat-icon-button color="primary" type="button" matTooltip="{{
                     confirmingDelete ? 'Confirm delete' : 'Delete'
                   }}" (click)="confirmingDelete ? onDelete() : onConfirmingDelete()">
                   <mat-icon style="color: #232323" [class.btn-delete-color]="!confirmingDelete"
@@ -178,6 +178,6 @@
     </ng-container>
   </ng-container>
   <ng-template #contactNotFound>
-    <div class="contact-not-found">Contact not found...</div>
+    <div class="contact-not-found">Contato não encontrado!</div>
   </ng-template>
 </div>
