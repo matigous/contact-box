@@ -1,5 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output, inject } from '@angular/core';
 import { Contact } from '../../../../../shared/types/types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-item',
@@ -9,10 +10,12 @@ import { Contact } from '../../../../../shared/types/types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItem {
-  @Input() contactItem: Contact = {} as Contact;
-  show(id: string){
-    console.log(this.contactItem.photo)
-  }
-  @Output() onDelete = new EventEmitter()
+  private router = inject(Router);
 
+  @Input() contactItem: Contact = {} as Contact;
+  @Output() onDelete = new EventEmitter()
+  
+  show(id: string){
+    this.router.navigate(['/contact-details', id])
+  }
 }
