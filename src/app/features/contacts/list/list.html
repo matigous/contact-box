@@ -1,6 +1,6 @@
 <div class="list-container">
   <div class="list-filter">
-    <app-filter (newFilter)="updateFilter($event)"></app-filter>
+    <app-filter (filterContatcsResult)="updateFilter($event)" [contacts]="contacts"></app-filter>
   </div>
   <div class="list-contacts">
     <div *ngFor="let contact of contactsListFiltered">
