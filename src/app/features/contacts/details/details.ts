@@ -46,10 +46,12 @@ export class Details implements OnInit {
   protected mode: DetailsModeType = 'creating';
   protected timeoutConfirmingDelete: any;
   protected snackBarDuration = 2000;
+  protected loading = false;
 
   @ViewChild('photoUrlInput') photoUrlInput?: ElementRef<HTMLInputElement>;
 
   constructor() {
+    this.loading = true;
     // Get Social Networks
     this.socialNetworksService.availableSocialNetworks$
       .pipe(takeUntil(this.destroy$))
@@ -66,19 +68,10 @@ export class Details implements OnInit {
 
   private getContactOrNewContact() {
     this.idContact = this.activatedRoute.snapshot.params['id'];
+
     if (this.idContact) {
-      this.mode = 'viewing';
+      this.switchViewingMode();
       this.getContactAndFillForms();
-      if (!this.contact) {
-        this.sendMessage(
-          'You will be redirected to the contact list in 5 seconds',
-          undefined,
-          5000
-        );
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 5000);
-      }
     }
   }
 
@@ -107,10 +100,13 @@ export class Details implements OnInit {
       this.contactsService
         .getContactById(this.idContact)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((contact) => {
-          this.contact = contact;
-
-          if (!contact) {
+        .subscribe({
+          next: (contact) => {
+            this.contact = contact;
+            this.formService.fillForm(this.contact);
+            this.loading = false;
+          },
+          error: (err) => {
             this.sendMessage(
               'You will be redirected to the contact list in 5 seconds',
               undefined,
@@ -119,9 +115,8 @@ export class Details implements OnInit {
             setTimeout(() => {
               this.router.navigate(['/']);
             }, 5000);
-          } else {
-            this.formService.fillForm(this.contact);
-          }
+            this.loading = false;
+          },
         });
     }
   }
@@ -184,22 +179,28 @@ export class Details implements OnInit {
     if (contact) {
       // this.contactsService.updateContact(contact.id, contact);
       this.contactsService.updateContact(contact.id, contact).subscribe(
-        (next) => this.contact = contact //TODO: Verificar se precisa.
+        (next) => (this.contact = contact) //TODO: Verificar se precisa.
       );
     }
   }
 
   protected onEdit() {
     this.mode = 'editing';
+    this.editingPhotoUrl = false;
   }
 
   protected onCancel() {
     if (this.idContact) {
       this.getContactAndFillForms();
-      this.mode = 'viewing';
+      this.switchViewingMode();
     } else {
       this.contactForm?.reset();
     }
+  }
+
+  private switchViewingMode() {
+    this.mode = 'viewing';
+    this.editingPhotoUrl = false;
   }
 
   protected onSubmit() {
@@ -211,7 +212,7 @@ export class Details implements OnInit {
           .addContact(contact)
           .pipe(takeUntil(this.destroy$))
           .subscribe((newContact) => {
-            this.mode = 'viewing';
+            this.switchViewingMode();
             this.sendMessage('Contact added');
             this.router.navigate(['/contact-details/' + newContact.id]);
           });
@@ -222,7 +223,7 @@ export class Details implements OnInit {
           .updateContact(contact.id, contact)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
-            this.mode = 'viewing';
+            this.switchViewingMode();
             this.sendMessage('Contact edited');
           });
       }

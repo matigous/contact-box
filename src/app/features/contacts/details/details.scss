@@ -11,14 +11,14 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 4rem);
   position: relative;
   width: 81%;
   margin: 0 auto;
   align-items: center;
 
   .card-content {
-    height: calc(100vh - 24rem);
+    height: calc(100vh - 21rem);
     overflow-y: auto;
     display: flex;
     flex-direction: column;

@@ -1,6 +1,6 @@
 <ng-container
   *ngIf="
-    idContact === undefined || (idContact && contact);
+    idContact === undefined || (idContact && contact) ;
     else contactNotFound
   "
 >
@@ -32,6 +32,9 @@
               <div mat-card-avatar 
               class="no-avatar avatar no-avatar-color"
               [style.cursor]="!isViewing() ? 'pointer' : ''"
+              [matTooltip]="
+                !isViewing() && !editingPhotoUrl ? 'Edit photo url' : ''
+              "
               (click)="!isViewing() ? toogleEditPhotoUrl() : null">
                 <span class="letter-avatar">
                   {{
@@ -42,7 +45,7 @@
                 </span>
               </div>
             </ng-template>
-            
+
               <div class="contact-info-item">
                 <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item"
                   [ngClass]="{ 'no-border': !isViewing() }">
@@ -309,5 +312,6 @@
   </ng-container>
 </ng-container>
 <ng-template #contactNotFound>
-  <div class="contact-not-found">Contact not found...</div>
+  <div *ngIf="!loading" class="contact-not-found">Contact not found...</div>
+  <div *ngIf="loading" class="contact-not-found">Carregando...</div>
 </ng-template>
