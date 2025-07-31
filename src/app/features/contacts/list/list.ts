@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ContactsService } from '../../../shared/services/contacts-service';
-import { Contact } from '../../../shared/types/types';
+import { Contact } from '../../../shared/models/contact-model';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

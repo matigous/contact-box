@@ -8,17 +8,12 @@ import {
 import { ContactFormService } from '../../../shared/services/contact-form-service';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ContactsService } from '../../../shared/services/contacts-service';
-import {
-  AvailableSocialNetwork,
-  Contact,
-  DetailsModeType,
-  SocialNetwork,
-  SocialNetworkType,
-} from '../../../shared/types/types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { pipe, Subject, takeUntil, tap } from 'rxjs';
 import { SocialNetworksService } from '../../../shared/services/social-networks-service';
+import { AvailableSocialNetwork, SocialNetwork, SocialNetworkType } from '../../../shared/models/social-network-model';
+import { Contact, DetailsModeType } from '../../../shared/models/contact-model';
 
 @Component({
   selector: 'app-details',
@@ -259,6 +254,10 @@ export class Details implements OnInit {
       }, this.snackBarDuration);
     }
   }
+
+  // getIcon(icon: string) {
+  //   return SocialNetworkIcon[icon as keyof typeof SocialNetworkIcon];
+  // }
 
   ngOnDestroy(): void {
     this.destroy$.next();
