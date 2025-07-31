@@ -14,22 +14,30 @@ import { Contact } from '../types/types';
 export class ContactFormService {
   private fb = inject(FormBuilder);
 
-  public formGroup = this.fb.group({
-    id: [''],
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    phone: [
-      '',
-      [Validators.required, Validators.pattern(/^\+55\s\d{2}\s9\d{4}-\d{4}$/)],
-    ],
-    email: ['', [Validators.email]],
-    fav: [false],
-    photo: [
-      '',
-      [Validators.pattern(/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))?$/i)],
-    ],
-    notes: [''],
-    socialNetworks: this.fb.array([]),
-  });
+  public formGroup = this.fb.group(
+    {
+      id: [''],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      phone: ['', [Validators.pattern(/^\+55\s\d{2}\s\d{5}-\d{4}$/)]],
+      email: ['', [Validators.email]],
+      fav: [false],
+      photo: [
+        '',
+        [Validators.pattern(/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))?$/i)],
+      ],
+      notes: [''],
+      socialNetworks: this.fb.array([]),
+    },
+    { validators: this.emailOrPhone }
+  );
+  emailOrPhone(group: FormGroup) {
+    const phone = group.get('phone')?.value;
+    const email = group.get('email')?.value;
+    if (!phone && !email) {
+      return { atLeastOneRequired: true };
+    }
+    return null;
+  }
 
   createSocialNetwork(): FormGroup {
     return this.fb.group({
@@ -39,20 +47,6 @@ export class ContactFormService {
   }
 
   fillForm(contact: Contact) {
-    const snArray = this.formGroup.get('socialNetworks') as FormArray;
-    snArray.clear();
-
-    const socialControls = (contact.socialNetworks || []).map((sn) => {
-      const group = this.createSocialNetwork();
-      group.setValue({
-        type: sn.type,
-        url: sn.url,
-      });
-      return group;
-    });
-
-    socialControls.forEach((c) => snArray.push(c));
-
     this.formGroup.setValue({
       id: contact.id,
       name: contact.name,
@@ -61,11 +55,22 @@ export class ContactFormService {
       fav: contact.fav,
       photo: contact.photo ?? null,
       notes: contact.notes ?? null,
-      socialNetworks:
-        contact.socialNetworks?.map((sn) => ({
-          type: sn.type,
-          url: sn.url,
-        })) ?? [],
+      socialNetworks: [],
     });
+    let snArray = this.formGroup?.get('socialNetworks') as FormArray;
+
+    if (contact.socialNetworks && Array.isArray(contact.socialNetworks)) {
+      snArray.clear();
+      contact.socialNetworks.forEach((sn) => {
+        if (sn) {
+          let snForm = this.createSocialNetwork();
+          snForm.setValue({
+            type: sn.type,
+            url: sn.url,
+          });
+          snArray.push(snForm);
+        }
+      });
+    }
   }
 }

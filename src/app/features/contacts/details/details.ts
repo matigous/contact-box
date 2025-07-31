@@ -107,10 +107,22 @@ export class Details implements OnInit {
       this.contactsService
         .getContactById(this.idContact)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((contact) => (this.contact = contact));
-      if (this.contact) {
-        this.formService.fillForm(this.contact);
-      }
+        .subscribe((contact) => {
+          this.contact = contact;
+
+          if (!contact) {
+            this.sendMessage(
+              'You will be redirected to the contact list in 5 seconds',
+              undefined,
+              5000
+            );
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 5000);
+          } else {
+            this.formService.fillForm(this.contact);
+          }
+        });
     }
   }
 
@@ -154,6 +166,7 @@ export class Details implements OnInit {
 
   protected toogleEditPhotoUrl() {
     this.editingPhotoUrl = !this.editingPhotoUrl;
+
     setTimeout(() => {
       this.photoUrlInput?.nativeElement?.focus();
     }, 10);
@@ -169,7 +182,10 @@ export class Details implements OnInit {
     const contact = this.contactForm?.getRawValue();
 
     if (contact) {
-      this.contactsService.updateContact(contact.id, contact);
+      // this.contactsService.updateContact(contact.id, contact);
+      this.contactsService.updateContact(contact.id, contact).subscribe(
+        (next) => this.contact = contact //TODO: Verificar se precisa.
+      );
     }
   }
 
@@ -190,6 +206,7 @@ export class Details implements OnInit {
     if (this.contactForm?.valid) {
       let contact: Contact = this.contactForm?.getRawValue();
       if (this.isCreating()) {
+        contact.id = Date.now().toString(); //TODO: Verificar se precisa.
         this.contactsService
           .addContact(contact)
           .pipe(takeUntil(this.destroy$))
@@ -214,24 +231,33 @@ export class Details implements OnInit {
 
   onConfirmingDelete() {
     clearTimeout(this.timeoutConfirmingDelete);
+
     this.timeoutConfirmingDelete = setInterval(() => {
       if (this.confirmingDelete) this.confirmingDelete = false;
     }, 3000);
+
     this.confirmingDelete = true;
   }
 
   protected onDelete() {
     if (this.idContact) {
-      this.contactsService.deleteContact(this.idContact);
+      // this.contactsService.deleteContact(this.idContact);
+      this.contactsService.deleteContact(this.idContact).subscribe();
       this.sendMessage('Contact deleted');
+
       setTimeout(() => {
         this.router.navigate(['/']);
       }, this.snackBarDuration);
     }
   }
 
+  // getIcon(icon: string) {
+  //   return SocialNetworkIcon[icon as keyof typeof SocialNetworkIcon];
+  // }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.formService.formGroup?.reset();
   }
 }

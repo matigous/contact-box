@@ -42,31 +42,19 @@
                 </span>
               </div>
             </ng-template>
-
-            <div class="contact-info-item">
-              <mat-form-field
-                [appearance]="isViewing() ? 'fill' : 'outline'"
-                class="contact-info-item"
-                [ngClass]="{ 'no-border': !isViewing() }"
-              >
-                <mat-label>Name</mat-label>
-                <input
-                  matInput
-                  formControlName="name"
-                  [readonly]="isViewing()"
-                  required
-                />
-                <mat-error
-                  *ngIf="contactForm.get('name')?.hasError('required')"
-                >
-                  Name is required.
-                </mat-error>
-                <mat-error
-                  *ngIf="contactForm.get('name')?.hasError('minlength')"
-                >
-                  Minimum 3 characters.
-                </mat-error>
-              </mat-form-field>
+            
+              <div class="contact-info-item">
+                <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item"
+                  [ngClass]="{ 'no-border': !isViewing() }">
+                  <mat-label>Name</mat-label>
+                  <input matInput formControlName="name" [readonly]="isViewing()" required />
+                  <mat-error *ngIf="contactForm.get('name')?.hasError('required')">
+                    Name is required.
+                  </mat-error>
+                  <mat-error *ngIf="contactForm.get('name')?.hasError('minlength')">
+                    Minimum 3 characters.
+                  </mat-error>
+                </mat-form-field>
 
               <!-- Back Navigation -->
               <button
@@ -98,33 +86,25 @@
                 >
                   {{
                     contactForm.get("fav")?.value
-                      ? "favorite"
-                      : "favorite_border"
-                  }}
-                </mat-icon>
-              </button>
+                    ? "favorite"
+                    : "favorite_border"
+                    }}
+                  </mat-icon>
+                </button>
+              </div>
             </div>
-          </div>
-        </mat-card-header>
+          </mat-card-header>
 
-        <mat-card-content class="card-content">
-          <div *ngIf="!isViewing() && editingPhotoUrl" class="contact-info-row">
-            <mat-form-field
-              [appearance]="isViewing() ? 'fill' : 'outline'"
-              class="photo-url"
-            >
-              <mat-label>Photo URL</mat-label>
-              <input
-                #photoUrlInput
-                matInput
-                formControlName="photo"
-                placeholder="Add photo url..."
-              />
-              <mat-error *ngIf="contactForm.get('photo')?.hasError('pattern')">
-                Must be a valid image URL.
-              </mat-error>
-            </mat-form-field>
-          </div>
+          <mat-card-content class="card-content">
+            <div *ngIf="!isViewing() && editingPhotoUrl" class="contact-info-row">
+              <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="photo-url">
+                <mat-label>Photo URL</mat-label>
+                <input #photoUrlInput matInput formControlName="photo" placeholder="Add photo url..." />
+                <mat-error *ngIf="contactForm.get('photo')?.hasError('pattern')">
+                  Must be a valid image URL.
+                </mat-error>
+              </mat-form-field>
+            </div>
 
           <!-- Phone and e-mail -->
           <div class="contact-info-row">
@@ -161,33 +141,19 @@
               </button>
             </mat-form-field>
 
-            <mat-form-field
-              [appearance]="isViewing() ? 'fill' : 'outline'"
-              class="contact-info-item"
-            >
-              <mat-label>Email</mat-label>
-              <input
-                matInput
-                formControlName="email"
-                [readonly]="isViewing()"
-              />
-            </mat-form-field>
-          </div>
+              <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" [readonly]="isViewing()" />
+              </mat-form-field>
+            </div>
 
-          <!-- Notes -->
-          <div class="contact-info-row">
-            <mat-form-field
-              [appearance]="isViewing() ? 'fill' : 'outline'"
-              class="w-full"
-            >
-              <mat-label>Notes</mat-label>
-              <textarea
-                matInput
-                formControlName="notes"
-                [readonly]="isViewing()"
-              ></textarea>
-            </mat-form-field>
-          </div>
+            <!-- Notes -->
+            <div class="contact-info-row">
+              <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="w-full">
+                <mat-label>Notes</mat-label>
+                <textarea matInput formControlName="notes" [readonly]="isViewing()"></textarea>
+              </mat-form-field>
+            </div>
 
           <!-- Social Networks -->
           <div class="contact-info-row">
@@ -241,23 +207,16 @@
                   </mat-select>
                 </mat-form-field>
 
-                <mat-form-field
-                  [appearance]="isViewing() ? 'fill' : 'outline'"
-                  class="flex-grow-1"
-                >
-                  <mat-label>URL</mat-label>
-                  <input
-                    matInput
-                    formControlName="url"
-                    placeholder="https://..."
-                  />
-                  <mat-error *ngIf="sn.get('url')?.hasError('required')">
-                    URL is required.
-                  </mat-error>
-                  <mat-error *ngIf="sn.get('url')?.hasError('pattern')">
-                    Must be a valid URL.
-                  </mat-error>
-                </mat-form-field>
+                  <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="flex-grow-1">
+                    <mat-label>URL</mat-label>
+                    <input matInput formControlName="url" placeholder="https://..." />
+                    <mat-error *ngIf="sn.get('url')?.hasError('required')">
+                      URL is required.
+                    </mat-error>
+                    <mat-error *ngIf="sn.get('url')?.hasError('pattern')">
+                      Must be a valid URL.
+                    </mat-error>
+                  </mat-form-field>
 
                 <button
                   matMiniFab

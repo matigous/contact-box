@@ -1,10 +1,13 @@
 .app-header {
+  height: 8vh;
+
   mat-toolbar {
+    display: flex;
     background-color: var(--mat-sys-primary);
     border-radius: 0;
     color: var(--mat-sys-on-primary);
-    padding: 0 40px;
-    height: 86px;
+    padding: 0 10px;
+    height: 100%;
   }
 
   img {
@@ -12,6 +15,15 @@
   }
 
   h1 {
-    margin-left: 30%;
+    display: block;
+    margin-right: 0 auto;
+    text-align: center;
+    flex: 1;
+    z-index: 1;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  .spacer {
+    flex: 0 1 120px;
   }
 }

@@ -1,50 +1,65 @@
 .contact-container {
   display: flex;
   flex-direction: row;
-  height: 70px;  
-  justify-content: space-between;  
-}
-.mat-mdc-card {
-  box-shadow: none;
-  border-radius: 0; 
-  cursor: pointer;
+  height: 70px;
+  justify-content: space-between;
 }
 
-.mat-mdc-card-header{
+.mat-mdc-card {
+  box-shadow: none;
+  border-radius: 0;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 5px 8px;
+}
+
+.mat-mdc-card:hover {
+  opacity: 0.8;
+}
+
+.mat-mdc-card-header {
   width: 300px;
 }
-.contact-phone{
+
+.contact-phone {
   display: flex;
   width: 300px;
-  align-items: center;  
+  align-items: center;
   gap: 10px;
 }
+
 .mat-mdc-card-avatar {
   margin: 0;
 }
-.mat-mdc-card-actions{
+
+.mat-mdc-card-actions {
   width: 200px;
   display: flex;
   justify-content: space-around;
 }
-.mdc-fab{
+
+.mdc-fab {
   background: none;
   box-shadow: none;
 }
-.national-flag{
+
+.national-flag {
   width: 32px;
   height: 32px;
 }
+
 .mat-divider {
-  border-color:  #cfcfcfe0;
+  border-color: #cfcfcfe0;
 }
-.no-avatar{
+
+.no-avatar {
   display: flex;
   justify-content: center;
   align-items: centerr;
   background-color: #3e7bee;
-  
+
 }
+
 .letter-avatar {
   color: white;
   margin: 12px;

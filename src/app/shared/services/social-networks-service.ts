@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import socialNetworksJson from '../../../../api/contacts.json';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';

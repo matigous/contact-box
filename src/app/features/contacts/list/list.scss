@@ -1,23 +1,27 @@
 .list-container {
   display: flex;
-  flex-direction: column;  
-  width: 90%;
-  height: auto;
+  flex-direction: column;
+  width: 80%;
+  height: 92dvh;
   margin: 0 auto;
   align-items: center;
 }
 
 .list-filter {
-  width: 90%;
-  height: 100px;
-  background-color: aqua;
+  height: 80px;
+  width: 100%;
 }
 
 .list-contacts {
-  width: 90%;
-  height: 100%; 
-  
+  width: 100%;
+  height: auto;
+  padding-inline: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  scrollbar-color: #818181 #ffffff;
+  scrollbar-width: thin;
+  gap: 8px;
 }
