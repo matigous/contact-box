@@ -24,18 +24,18 @@
   </ng-template>
 
   <mat-card-actions>
-    <button matMiniFab><mat-icon style="color: #C19EC9;"> phone</mat-icon></button>
-    <button matMiniFab><mat-icon style="color: #72C6DF"> chat_bubble</mat-icon></button>
-    <button matMiniFab><mat-icon style="color: #74C170"> videocam</mat-icon></button>
-    <button matMiniFab [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <button matMiniFab (click)="$event.stopPropagation()"><mat-icon style="color: #C19EC9;"> phone</mat-icon></button>
+    <button matMiniFab (click)="$event.stopPropagation()"><mat-icon style="color: #72C6DF"> chat_bubble</mat-icon></button>
+    <button matMiniFab (click)="$event.stopPropagation()"><mat-icon style="color: #74C170"> videocam</mat-icon></button>
+    <button matMiniFab (click)="$event.stopPropagation()" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/contact-details/{{contactItem.id}}">
+      <button mat-menu-item (click)="edit(contactItem.id, $event)">
         <mat-icon>edit</mat-icon>
         <span>Editar</span>
       </button>
-      <button mat-menu-item (click)="onDelete.emit(this.contactItem.id)">
+      <button mat-menu-item (click)="delete(contactItem.id, $event)">
         <mat-icon>delete_outline</mat-icon>
         <span>Deletar</span>
       </button>

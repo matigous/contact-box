@@ -47,30 +47,30 @@ export class ContactFormService {
   }
 
   fillForm(contact: Contact) {
-    this.formGroup.setValue({
-      id: contact.id,
-      name: contact.name,
-      phone: contact.phone,
-      email: contact.email ?? null,
-      fav: contact.fav,
-      photo: contact.photo ?? null,
-      notes: contact.notes ?? null,
-      socialNetworks: [],
-    });
-    let snArray = this.formGroup?.get('socialNetworks') as FormArray;
+  this.formGroup.patchValue({
+    id: contact.id,
+    name: contact.name,
+    phone: contact.phone,
+    email: contact.email ?? null,
+    fav: contact.fav,
+    photo: contact.photo ?? null,
+    notes: contact.notes ?? null
+  });
 
-    if (contact.socialNetworks && Array.isArray(contact.socialNetworks)) {
-      snArray.clear();
-      contact.socialNetworks.forEach((sn) => {
-        if (sn) {
-          let snForm = this.createSocialNetwork();
-          snForm.setValue({
-            type: sn.type,
-            url: sn.url,
-          });
-          snArray.push(snForm);
-        }
-      });
-    }
+  let snArray = this.formGroup.get('socialNetworks') as FormArray;
+  snArray.clear();
+
+  if (contact.socialNetworks && Array.isArray(contact.socialNetworks)) {
+    contact.socialNetworks.forEach((sn) => {
+      if (sn) {
+        let snForm = this.createSocialNetwork();
+        snForm.patchValue({
+          type: sn.type,
+          url: sn.url,
+        });
+        snArray.push(snForm);
+      }
+    });
   }
+}
 }

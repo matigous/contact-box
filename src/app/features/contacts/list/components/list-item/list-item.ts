@@ -1,5 +1,14 @@
-import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { Contact } from '../../../../../shared/models/contact-model';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
+  inject,
+} from '@angular/core';
+import { Contact } from '../../../../../shared/types/types';
+import { Router } from '@angular/router';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-list-item',
@@ -9,10 +18,26 @@ import { Contact } from '../../../../../shared/models/contact-model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItem {
-  @Input() contactItem: Contact = {} as Contact;
-  show(id: string){
-    console.log(this.contactItem.photo)
-  }
-  @Output() onDelete = new EventEmitter()
+  private router = inject(Router);
 
+  @Input() contactItem: Contact = {} as Contact;
+  @Output() onDelete = new EventEmitter();
+
+  show(id: string) {
+    this.router.navigate(['/contact-details', id]);
+  }
+
+  edit(id: string, event: Event) {
+    event.stopPropagation();
+    this.router.navigate(['/contact-details', id], {
+      queryParams: {
+        m: '1',
+      },
+    });
+  }
+
+  delete(id: string, event: Event) {
+    event.stopPropagation();
+    this.onDelete.emit(id);
+  }
 }

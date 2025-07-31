@@ -9,6 +9,11 @@ export enum SocialNetworkType {
   Reddit = 'Reddit'
 }
 
+export interface AvailableSocialNetwork {
+  type: SocialNetworkType;
+  iconUrl: string;
+}
+
 export enum SocialNetworkIcon {
   Facebook = '/assets/icons/facebook-50.png',
   Instagram = '/assets/icons/instagram-50.png',

@@ -120,24 +120,80 @@
       "socialNetworks": []
     },
     {
-      "id": "13",
-      "name": "Aab",
-      "phone": "+55 21 91234-4569",
+      "id": "1753925369629",
+      "name": "teset",
+      "phone": "+55 11 91234-5678",
       "email": "",
       "fav": false,
       "photo": "",
-      "notes": "",
-      "socialNetworks": []
+      "notes": "teste",
+      "socialNetworks": [
+        {
+          "type": "Telegram",
+          "url": "http://localhost:4200/contact-details"
+        }
+      ]
     },
     {
-      "id": "1753911479070",
-      "name": "aaaSemtelefone",
-      "phone": null,
-      "email": "naotenho@iphone.apple",
-      "fav": null,
+      "id": "1753928416776",
+      "name": "Alterado",
+      "phone": "+55 11 99123-5555",
+      "email": null,
+      "fav": true,
       "photo": null,
-      "notes": null,
-      "socialNetworks": []
+      "notes": "teste",
+      "socialNetworks": [
+        {
+          "type": "Instagram",
+          "url": "http://localhost:4200/contact-details"
+        },
+        {
+          "type": "Telegram",
+          "url": "http://localhost:4200/contact-details"
+        }
+      ]
+    }
+  ],
+  "social-networks": [
+    {
+      "type": "Facebook",
+      "iconUrl": "assets/icons/facebook-50.png",
+      "id": "6416"
+    },
+    {
+      "type": "GitHub",
+      "iconUrl": "assets/icons/github-50.png",
+      "id": "51ba"
+    },
+    {
+      "type": "Instagram",
+      "iconUrl": "assets/icons/instagram-50.png",
+      "id": "c5d3"
+    },
+    {
+      "type": "LinkedIn",
+      "iconUrl": "assets/icons/linkedin-50.png",
+      "id": "0e7e"
+    },
+    {
+      "type": "Reddit",
+      "iconUrl": "assets/icons/reddit-50.png",
+      "id": "d5d9"
+    },
+    {
+      "type": "Telegram",
+      "iconUrl": "assets/icons/telegram-50.png",
+      "id": "f670"
+    },
+    {
+      "type": "WhatsApp",
+      "iconUrl": "assets/icons/whatsapp-50.png",
+      "id": "29a6"
+    },
+    {
+      "type": "YouTube",
+      "iconUrl": "assets/icons/youtube-50.png",
+      "id": "59d1"
     }
   ]
 }
