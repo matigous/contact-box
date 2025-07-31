@@ -120,25 +120,6 @@
       "socialNetworks": []
     },
     {
-      "id": "13",
-      "name": "Aab",
-      "phone": "+55 21 91234-4569",
-      "email": "",
-      "fav": false,
-      "photo": "",
-      "notes": "",
-      "socialNetworks": [
-        {
-          "type": "LinkedIn",
-          "url": "http://localhost:4200/contact-details/13"
-        },
-        {
-          "type": "Instagram",
-          "url": "http://localhost:4200/contact-details/13"
-        }
-      ]
-    },
-    {
       "id": "1753925369629",
       "name": "teset",
       "phone": "+55 11 91234-5678",
@@ -147,6 +128,25 @@
       "photo": "",
       "notes": "teste",
       "socialNetworks": [
+        {
+          "type": "Telegram",
+          "url": "http://localhost:4200/contact-details"
+        }
+      ]
+    },
+    {
+      "id": "1753928416776",
+      "name": "Alterado",
+      "phone": "+55 11 99123-5555",
+      "email": null,
+      "fav": true,
+      "photo": null,
+      "notes": "teste",
+      "socialNetworks": [
+        {
+          "type": "Instagram",
+          "url": "http://localhost:4200/contact-details"
+        },
         {
           "type": "Telegram",
           "url": "http://localhost:4200/contact-details"

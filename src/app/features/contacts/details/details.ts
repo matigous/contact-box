@@ -47,11 +47,14 @@ export class Details implements OnInit {
   protected timeoutConfirmingDelete: any;
   protected snackBarDuration = 2000;
   protected loading = false;
+  protected modeQueryParams = '';
 
   @ViewChild('photoUrlInput') photoUrlInput?: ElementRef<HTMLInputElement>;
 
   constructor() {
     this.loading = true;
+    this.modeQueryParams = this.activatedRoute.snapshot.queryParamMap.get('m') ?? '';
+
     // Get Social Networks
     this.socialNetworksService.availableSocialNetworks$
       .pipe(takeUntil(this.destroy$))
@@ -64,13 +67,16 @@ export class Details implements OnInit {
 
     // Get Contact
     this.getContactOrNewContact();
+
+
   }
 
   private getContactOrNewContact() {
     this.idContact = this.activatedRoute.snapshot.params['id'];
-
+    
     if (this.idContact) {
-      this.switchViewingMode();
+      this.switchViewingMode(); 
+      if(this.modeQueryParams=='1') this.mode = 'editing';
       this.getContactAndFillForms();
     }
   }
@@ -193,12 +199,14 @@ export class Details implements OnInit {
     if (this.idContact) {
       this.getContactAndFillForms();
       this.switchViewingMode();
+      if(this.modeQueryParams=='1') this.modeQueryParams='';
     } else {
       this.contactForm?.reset();
+      this.router.navigate(['/']); //TODO: Adicionar confirmação
     }
   }
 
-  private switchViewingMode() {
+  private switchViewingMode() {    
     this.mode = 'viewing';
     this.editingPhotoUrl = false;
   }
@@ -251,10 +259,6 @@ export class Details implements OnInit {
       }, this.snackBarDuration);
     }
   }
-
-  // getIcon(icon: string) {
-  //   return SocialNetworkIcon[icon as keyof typeof SocialNetworkIcon];
-  // }
 
   ngOnDestroy(): void {
     this.destroy$.next();
