@@ -14,7 +14,7 @@
   <div *ngIf="contactItem.phone; else showEmail" class="main-contact">
     <img mat-card-avatar class="national-flag" src="https://cdn-icons-png.flaticon.com/512/3909/3909370.png"
       alt="Phone icon" matTooltip="{{contactItem.ddi}}">
-    <mat-card-subtitle subtitle-text-size>{{contactItem.phone}}</mat-card-subtitle>
+    <mat-card-subtitle subtitle-text-size>{{formatPhone(contactItem.phone)}}</mat-card-subtitle>
   </div>
   <ng-template #showEmail>
     <div class="main-contact">

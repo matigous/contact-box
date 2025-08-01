@@ -86,11 +86,13 @@
             <div class="contact-info-row">
               <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item formfield-ddi">
                 <mat-label>DDI</mat-label>
-                <input matInput formControlName="ddi" [readonly]="true" value="+55" />
+                <input matInput formControlName="" [readonly]="true" value="+55" />
               </mat-form-field>
               <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item">
                 <mat-label>Phone</mat-label>
-                <input matInput formControlName="phone" [readonly]="isViewing()" placeholder="11 91234-5678" />
+                <input matInput id="phone-input" formControlName="phone" [readonly]="isViewing()"
+                  placeholder="11 91234-5678" (change)="formatPhoneInput()" (keypress)="formatPhoneInput()"
+                  maxlength="15" />
                 <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
                   Phone is required.
                 </mat-error>
