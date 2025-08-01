@@ -61,7 +61,7 @@
 
               <!-- Back Navigation -->
               <button
-                matMiniFab
+                mat-icon-button
                 class="go-back-icon"
                 (click)="router.navigate(['/'])"
                 matTooltip="Go back to list"
@@ -72,7 +72,7 @@
 
               <!-- Favorite Toggle -->
               <button
-                matMiniFab
+                mat-icon-button
                 class="favorite-icon"
                 (click)="toggleFavorite()"
                 [matTooltip]="
@@ -129,17 +129,17 @@
                 Must be a valid Phone. Ex: +55 11 91234-5678
               </mat-error>
               <button
-                matMiniFab
+                mat-icon-button
                 matSuffix
                 matTooltip="Open in Whatsapp"
                 type="button"
                 class="btn-whatsapp"
+                [style.display]="!isViewing() ? 'none' : 'block'"
                 (click)="openWhatsapp(contactForm.get('phone')?.value)"
               >
                 <img
                   [src]="socialNetworksIcon(enumSocialNetworks.WhatsApp)"
-                  width="40px"
-                  height="40px"
+                  class="icon-social-network"
                 />
               </button>
             </mat-form-field>
@@ -165,16 +165,15 @@
             >
               <div *ngIf="sns.length" class="social-icons w-full">
                 <div class="contact-info-item">
-                  <mat-label>Social Networks</mat-label>
+                  <mat-label *ngIf="!isViewing()">Social Networks</mat-label>
                   <div class="btns-social-network">
                     <ng-container *ngFor="let sn of sns">
                       <img
                         *ngIf="sn.type"
-                        style="cursor: pointer"
+                        [matTooltip]="'Open in ' + sn.type"
                         (click)="openSocialNetwork(sn)"
                         [src]="socialNetworksIcon(sn.type)"
-                        width="40px"
-                        height="40px"
+                        class="icon-social-network"
                       />
                     </ng-container>
                   </div>
@@ -186,6 +185,7 @@
               *ngIf="!isViewing()"
               formArrayName="socialNetworks"
               class="w-full"
+              style="margin-top: 1rem;"
             >
               <div
                 *ngFor="let sn of socialNetworksControls; let i = index"
@@ -222,7 +222,7 @@
                   </mat-form-field>
 
                 <button
-                  matMiniFab
+                  mat-icon-button
                   color="warn"
                   (click)="removeSocialNetwork(i)"
                   type="button"
@@ -249,7 +249,7 @@
         <mat-card-actions class="card-actions">
           <div *ngIf="!isViewing()" class="w-full btns-editing-creating">
             <button
-              matMiniFab
+              mat-icon-button
               color="warn"
               type="button"
               matTooltip="Cancel"
@@ -258,7 +258,7 @@
               <mat-icon style="color: #f44336">cancel</mat-icon>
             </button>
             <button
-              matMiniFab
+              mat-icon-button
               color="primary"
               type="submit"
               [disabled]="contactForm.invalid"
@@ -273,7 +273,7 @@
           <div *ngIf="isViewing()" class="w-full btns-viewing">
             <div class="btn-delete">
               <button
-                matMiniFab
+                mat-icon-button
                 color="primary"
                 type="button"
                 matTooltip="{{
@@ -297,7 +297,7 @@
             </div>
 
             <button
-              matMiniFab
+              mat-icon-button
               color="primary"
               type="button"
               matTooltip="Edit"

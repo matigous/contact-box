@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { AvailableSocialNetwork, SocialNetworkType } from '../types/types';
+import { AvailableSocialNetwork, SocialNetworkType } from '../models/social-network-model';
+
 
 @Injectable({
   providedIn: 'root',

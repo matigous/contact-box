@@ -11,17 +11,26 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 10rem);
   position: relative;
-  width: 81%;
+  max-width: 900px;
+  width: 80%;
   margin: 0 auto;
   align-items: center;
 
   .card-content {
-    height: calc(100vh - 21rem);
+    height: calc(100vh - 25rem);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+
+    // mat-form-field {
+    //   height: 68px;
+    // }
+    
+    // mdc-text-field {
+    //   background: transparent;
+    // }
   }
 
   form {
@@ -69,8 +78,8 @@
 
 .avatar {
   border-radius: 50% !important;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
 }
 
@@ -100,7 +109,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
 
 .go-back-icon {
@@ -180,19 +189,31 @@
   color: #d32f2f;
 }
 
-:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: rgba(191, 224, 247, 0.533);
-}
-.icon-social-network {
-  width: 24px;
-}
-.save-button {
-  color: #1976d2;
+:host {
+  padding: 1rem;  
 }
 
-button[disabled] .save-button {
-  color: #575757;
-}
-.contact-not-found {
-  font-size: 3rem;
-}
+::ng-deep 
+  
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+      background-color: rgba(191, 224, 247, 0.533);
+    }
+    
+    .icon-social-network {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+    .save-button {
+      color: #1976d2;
+    }
+
+    button[disabled] .save-button {
+      color: #575757;
+    }
+    .contact-not-found {
+      font-size: 3rem;
+    }
+  
+
+  
