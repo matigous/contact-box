@@ -84,18 +84,22 @@
 
             <!-- Phone and e-mail -->
             <div class="contact-info-row">
+              <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item formfield-ddi">
+                <mat-label>DDI</mat-label>
+                <input matInput formControlName="ddi" [readonly]="true" value="+55" />
+              </mat-form-field>
               <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item">
                 <mat-label>Phone</mat-label>
-                <input matInput formControlName="phone" [readonly]="isViewing()" placeholder="+55 11 91234-5678" />
+                <input matInput formControlName="phone" [readonly]="isViewing()" placeholder="11 91234-5678" />
                 <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
                   Phone is required.
                 </mat-error>
                 <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern')">
-                  Must be a valid Phone. Ex: +55 11 91234-5678
+                  Must be a valid Phone. Ex: 11 91234-5678
                 </mat-error>
                 <button mat-icon-button matSuffix matTooltip="Open in Whatsapp" type="button" class="btn-whatsapp"
                   [style.display]="!isViewing() ? 'none' : 'block'"
-                  (click)="openWhatsapp(contactForm.get('phone')?.value)">
+                  (click)="openWhatsapp(contactForm.get('ddi')?.value, contactForm.get('phone')?.value)">
                   <img [src]="socialNetworksIcon(enumSocialNetworks.WhatsApp)" class="icon-social-network" />
                 </button>
               </mat-form-field>
@@ -178,11 +182,11 @@
               <button mat-icon-button color="primary" type="submit" [disabled]="contactForm.invalid" [matTooltip]="
                   contactForm.invalid ? 'Review required fields to save' : 'Save'
                 ">
-                <mat-icon style="color: #1565C0">save</mat-icon>
+                <mat-icon class="save-button">save</mat-icon>
               </button>
             </div>
 
-            <div *ngIf="isViewing()" class="w-full btns-viewing">
+            <div *ngIf=" isViewing()" class="w-full btns-viewing">
               <div class="btn-delete">
                 <button mat-icon-button color="primary" type="button" matTooltip="{{
                     confirmingDelete ? 'Confirm delete' : 'Delete'

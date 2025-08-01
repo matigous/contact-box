@@ -13,11 +13,13 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatFormField, MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [List, ListItem, Filter],
   imports: [
     CommonModule,
+    MatTooltipModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
@@ -28,8 +30,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [List, DetailsModule],
 })
-export class ContactsModule { }
+export class ContactsModule {}

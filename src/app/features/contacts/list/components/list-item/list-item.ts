@@ -23,11 +23,8 @@ export class ListItem {
 
   @Input() contactItem: Contact = {} as Contact;
   @Output() onDelete = new EventEmitter();
-  
 
-  constructor(private _contactsService: ContactsService) {    
-  }
-
+  constructor(private _contactsService: ContactsService) {}
 
   edit(id: string, event: Event) {
     event.stopPropagation();
@@ -48,7 +45,15 @@ export class ListItem {
   }
   toggleFav(event: Event) {
     event.stopPropagation();
-    this._contactsService.updateContact(this.contactItem.id, {...this.contactItem, fav:!this.contactItem.fav
-    }).subscribe()
+    this._contactsService
+      .updateContact(this.contactItem.id, {
+        ...this.contactItem,
+        fav: !this.contactItem.fav,
+      })
+      .subscribe();
+  }
+  openSocialNetwork(url: string, event: Event) {
+    event.stopPropagation();
+    window.open(url);
   }
 }

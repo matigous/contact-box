@@ -12,7 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { pipe, Subject, takeUntil, tap } from 'rxjs';
 import { SocialNetworksService } from '../../../shared/services/social-networks-service';
-import { AvailableSocialNetwork, SocialNetwork, SocialNetworkType } from '../../../shared/models/social-network-model';
+import {
+  AvailableSocialNetwork,
+  SocialNetwork,
+  SocialNetworkType,
+} from '../../../shared/models/social-network-model';
 import { Contact, DetailsModeType } from '../../../shared/models/contact-model';
 
 @Component({
@@ -48,7 +52,8 @@ export class Details implements OnInit {
 
   constructor() {
     this.loading = true;
-    this.modeQueryParams = this.activatedRoute.snapshot.queryParamMap.get('m') ?? '';
+    this.modeQueryParams =
+      this.activatedRoute.snapshot.queryParamMap.get('m') ?? '';
 
     // Get Social Networks
     this.socialNetworksService.availableSocialNetworks$
@@ -62,16 +67,14 @@ export class Details implements OnInit {
 
     // Get Contact
     this.getContactOrNewContact();
-
-
   }
 
   private getContactOrNewContact() {
     this.idContact = this.activatedRoute.snapshot.params['id'];
-    
+
     if (this.idContact) {
-      this.switchViewingMode(); 
-      if(this.modeQueryParams=='1') this.mode = 'editing';
+      this.switchViewingMode();
+      if (this.modeQueryParams == '1') this.mode = 'editing';
       this.getContactAndFillForms();
     }
   }
@@ -138,9 +141,9 @@ export class Details implements OnInit {
     );
   }
 
-  protected openWhatsapp(phone: string): void {
-    if (!phone) return;
-    const digits = phone.replace(/\D/g, '');
+  protected openWhatsapp(ddi: string, phone: string): void {
+    if (!phone || !ddi) return;
+    const digits = ddi + phone;
     const link = `https://wa.me/${digits}`;
     window.open(link, '_blank');
   }
@@ -194,14 +197,14 @@ export class Details implements OnInit {
     if (this.idContact) {
       this.getContactAndFillForms();
       this.switchViewingMode();
-      if(this.modeQueryParams=='1') this.modeQueryParams='';
+      if (this.modeQueryParams == '1') this.modeQueryParams = '';
     } else {
       this.contactForm?.reset();
       this.router.navigate(['/']); //TODO: Adicionar confirmação
     }
   }
 
-  private switchViewingMode() {    
+  private switchViewingMode() {
     this.mode = 'viewing';
     this.editingPhotoUrl = false;
   }
@@ -254,10 +257,6 @@ export class Details implements OnInit {
       }, this.snackBarDuration);
     }
   }
-
-  // getIcon(icon: string) {
-  //   return SocialNetworkIcon[icon as keyof typeof SocialNetworkIcon];
-  // }
 
   ngOnDestroy(): void {
     this.destroy$.next();

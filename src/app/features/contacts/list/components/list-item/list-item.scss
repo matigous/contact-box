@@ -8,14 +8,13 @@
 .contact-container:hover {
   transform: scale(1.02);
   transition: transform 150ms ease-in-out;
-
 }
 
 .mat-mdc-card {
   box-shadow: none;
   border-radius: 0;
   border-radius: 8px;
-  background-color: #16202D;
+  background-color: #16202d;
 }
 
 .mat-mdc-card:hover {
@@ -26,7 +25,7 @@
   width: 300px;
 }
 
-.contact-phone {
+.main-contact {
   display: flex;
   width: 300px;
   align-items: center;
@@ -43,12 +42,14 @@
   justify-content: flex-end;
   gap: 15px;
   flex: 1;
- 
 }
 
 .social-network-content {
   display: flex;
   gap: 8px;
+  div {
+    cursor: pointer;
+  }
 }
 
 .social-network-icon {
@@ -80,6 +81,6 @@
 .mat-mdc-card-subtitle {
   font-weight: 400;
 }
-.fav-button-toogle{
+.fav-button-toogle {
   cursor: pointer;
 }

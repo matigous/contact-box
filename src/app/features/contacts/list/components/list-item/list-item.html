@@ -11,42 +11,30 @@
     <mat-card-title>{{contactItem.name}}</mat-card-title>
     <mat-card-subtitle subtitle-text-size>{{contactItem.notes}}</mat-card-subtitle>
   </mat-card-header>
-  <div *ngIf="contactItem.phone; else showEmail" class="contact-phone">
+  <div *ngIf="contactItem.phone; else showEmail" class="main-contact">
     <img mat-card-avatar class="national-flag" src="https://cdn-icons-png.flaticon.com/512/3909/3909370.png"
-      alt="Phone icon">
+      alt="Phone icon" matTooltip="{{contactItem.ddi}}">
     <mat-card-subtitle subtitle-text-size>{{contactItem.phone}}</mat-card-subtitle>
   </div>
   <ng-template #showEmail>
-    <div class="contact-phone">
+    <div class="main-contact">
       <mat-icon>email</mat-icon>
       <mat-card-subtitle subtitle-text-size>{{contactItem.email}}</mat-card-subtitle>
     </div>
   </ng-template>
   <div class="social-network-container">
     <div class="social-network-content">
-      <div *ngFor="let icon of contactItem.socialNetworks">
-        <img class="social-network-icon" [src]="getIcon(icon.type)">
-      </div>
-      <div *ngFor="let icon of contactItem.socialNetworks">
-        <img class="social-network-icon" [src]="getIcon(icon.type)">
-      </div>
-      <div *ngFor="let icon of contactItem.socialNetworks">
-        <img class="social-network-icon" [src]="getIcon(icon.type)">
-      </div>
-      <div *ngFor="let icon of contactItem.socialNetworks">
+      <div *ngFor="let icon of contactItem.socialNetworks | slice:0:6" (click)="openSocialNetwork(icon.url, $event)"
+        matTooltip="{{icon.url}}">
         <img class="social-network-icon" [src]="getIcon(icon.type)">
       </div>
     </div>
-    <div class="fav-button-toogle" (click)="toggleFav($event)"> 
-      <mat-icon  style=" padding-left: 20px;" [class]="contactItem.fav ?'favorite-icon-color' : ''
+    <div class="fav-button-toogle" (click)="toggleFav($event)">
+      <mat-icon style=" padding-left: 20px;" [class]="contactItem.fav ?'favorite-icon-color' : ''
                   ">
-        {{
-        contactItem.fav ? "favorite": "favorite_border"
-        }}
+        {{contactItem.fav ? "favorite": "favorite_border"}}
       </mat-icon>
     </div>
-
-
 
     <mat-card-actions>
       <button matMiniFab (click)="$event.stopPropagation()" [matMenuTriggerFor]="menu"

@@ -3,7 +3,8 @@
     {
       "id": "3",
       "name": "Carla Souza",
-      "phone": "+55 31 98765-4321",
+      "ddi": "+55",
+      "phone": "31987654321",
       "fav": true,
       "email": "carla.souza@example.com",
       "photo": "https://randomuser.me/api/portraits/women/3.jpg",
@@ -12,13 +13,15 @@
     {
       "id": "4",
       "name": "Daniel Costa",
-      "phone": "+55 51 91234-8765",
+      "ddi": "+55",
+      "phone": "51912348765",
       "fav": true
     },
     {
       "id": "5",
       "name": "Eduarda Lima",
-      "phone": "+55 61 99888-1122",
+      "ddi": "+55",
+      "phone": "61998881122",
       "fav": false,
       "email": "eduarda.lima@example.com",
       "socialNetworks": [
@@ -35,7 +38,8 @@
     {
       "id": "6",
       "name": "Felipe Rocha",
-      "phone": "+55 71 98765-1234",
+      "ddi": "+55",
+      "phone": "71987651234",
       "fav": true,
       "photo": "https://randomuser.me/api/portraits/men/6.jpg",
       "socialNetworks": [
@@ -48,7 +52,8 @@
     {
       "id": "7",
       "name": "Gabriela Martins",
-      "phone": "+55 41 99123-4567",
+      "ddi": "+55",
+      "phone": "41991234567",
       "fav": false,
       "email": "gabriela.martins@example.com",
       "notes": "Cliente em potencial."
@@ -56,7 +61,8 @@
     {
       "id": "8",
       "name": "Henrique Almeida",
-      "phone": "+55 85 98877-6655",
+      "ddi": "+55",
+      "phone": "85988776655",
       "fav": true,
       "email": "henrique.almeida@example.com",
       "socialNetworks": [
@@ -73,13 +79,15 @@
     {
       "id": "9",
       "name": "Isabela Nunes",
-      "phone": "+55 62 99777-3344",
+      "ddi": "+55",
+      "phone": "62997773344",
       "fav": false
     },
     {
       "id": "10",
       "name": "João Pedro Silva",
-      "phone": "+55 82 91234-5566",
+      "ddi": "+55",
+      "phone": "82912345566",
       "fav": true,
       "email": "joao.silva@example.com",
       "photo": "https://randomuser.me/api/portraits/men/10.jpg",
@@ -97,7 +105,8 @@
     {
       "id": "11",
       "name": "Novo Teste",
-      "phone": "+55 61 91234-5678",
+      "ddi": "+55",
+      "phone": "61912345678",
       "email": "email@mail.com",
       "fav": false,
       "photo": "",
@@ -112,7 +121,8 @@
     {
       "id": "12",
       "name": "Alterador",
-      "phone": "+55 11 91236-8978",
+      "ddi": "+55",
+      "phone": "11912368978",
       "email": "",
       "fav": false,
       "photo": "",
@@ -122,7 +132,8 @@
     {
       "id": "1753925369629",
       "name": "teset",
-      "phone": "+55 11 91234-5678",
+      "ddi": "+55",
+      "phone": "11912345678",
       "email": "",
       "fav": false,
       "photo": "",
@@ -137,7 +148,8 @@
     {
       "id": "1753928416776",
       "name": "Alterado",
-      "phone": "+55 11 99123-5555",
+      "ddi": "+55",
+      "phone": "11991235555",
       "email": null,
       "fav": true,
       "photo": null,
@@ -150,6 +162,82 @@
         {
           "type": "Telegram",
           "url": "http://localhost:4200/contact-details"
+        }
+      ]
+    },
+    {
+      "id": "1754018099712",
+      "name": ".Social Beast",
+      "ddi": null,
+      "phone": "",
+      "email": "kdosadk@fd",
+      "fav": true,
+      "photo": "https://animalfactguide.com/wp-content/uploads/2025/03/panda-closeup-725x484.jpg",
+      "notes": "",
+      "socialNetworks": [
+        {
+          "type": "GitHub",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "Facebook",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "Instagram",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "LinkedIn",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "Reddit",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "Telegram",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "WhatsApp",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "YouTube",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "GitHub",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "Facebook",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "Instagram",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "LinkedIn",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "Reddit",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "Telegram",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "WhatsApp",
+          "url": "http://localhost:4200/"
+        },
+        {
+          "type": "YouTube",
+          "url": "http://localhost:4200/"
         }
       ]
     }

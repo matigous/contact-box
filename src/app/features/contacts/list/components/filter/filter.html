@@ -6,12 +6,10 @@
   </div>
   <span class="spacer"></span>
 
-  <button matMiniFab class="favorite-icon" (click)="toggleLikedFilter()" type="button">
+  <button matMiniFab class="favorite-icon" (click)="toggleLikedFilter()" type="button" matTooltip="Favoritos">
     <mat-icon>
       {{filterLike ? "favorite" : "favorite_border"}}
     </mat-icon>
   </button>
   <button class="new-button" routerLink='/contact-details/'>Adicionar</button>
 </div>
-  <!-- <span class="spacer"></span> -->
-

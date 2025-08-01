@@ -1,5 +1,5 @@
 .contact-container {
-  padding: 20px
+  padding: 20px;
 }
 
 .contact-card {
@@ -13,22 +13,13 @@
   width: 80%;
   margin: 0 auto;
   align-items: center;
-  background-color:
-    #16202D;
+  background-color: #16202d;
 
   .card-content {
     height: calc(100vh - 31.5rem);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-
-    // mat-form-field {
-    //   height: 68px;
-    // }
-
-    // mdc-text-field {
-    //   background: transparent;
-    // }
   }
 
   form {
@@ -64,6 +55,10 @@
   display: flex;
   flex-grow: 1;
   align-items: center;
+}
+.formfield-ddi {
+  width: 1vw;
+  min-width: 75px;
 }
 
 .flex {
@@ -186,8 +181,6 @@
   margin: 5rem;
   color: #d32f2f;
 }
-
-
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: rgba(191, 224, 247, 0.533);

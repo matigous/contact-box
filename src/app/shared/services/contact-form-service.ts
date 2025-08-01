@@ -18,7 +18,8 @@ export class ContactFormService {
     {
       id: [''],
       name: ['', [Validators.required, Validators.minLength(3)]],
-      phone: ['', [Validators.pattern(/^\+55\s\d{2}\s\d{5}-\d{4}$/)]],
+      ddi: ['', [Validators.pattern(/^\+\d{1,3}$/)]],
+      phone: ['', [Validators.pattern(/^\d{10,11}$/)]],
       email: ['', [Validators.email]],
       fav: [false],
       photo: [
@@ -47,30 +48,30 @@ export class ContactFormService {
   }
 
   fillForm(contact: Contact) {
-  this.formGroup.patchValue({
-    id: contact.id,
-    name: contact.name,
-    phone: contact.phone,
-    email: contact.email ?? null,
-    fav: contact.fav,
-    photo: contact.photo ?? null,
-    notes: contact.notes ?? null
-  });
-
-  let snArray = this.formGroup.get('socialNetworks') as FormArray;
-  snArray.clear();
-
-  if (contact.socialNetworks && Array.isArray(contact.socialNetworks)) {
-    contact.socialNetworks.forEach((sn) => {
-      if (sn) {
-        let snForm = this.createSocialNetwork();
-        snForm.patchValue({
-          type: sn.type,
-          url: sn.url,
-        });
-        snArray.push(snForm);
-      }
+    this.formGroup.patchValue({
+      id: contact.id,
+      name: contact.name,
+      phone: contact.phone,
+      email: contact.email ?? null,
+      fav: contact.fav,
+      photo: contact.photo ?? null,
+      notes: contact.notes ?? null,
     });
+
+    let snArray = this.formGroup.get('socialNetworks') as FormArray;
+    snArray.clear();
+
+    if (contact.socialNetworks && Array.isArray(contact.socialNetworks)) {
+      contact.socialNetworks.forEach((sn) => {
+        if (sn) {
+          let snForm = this.createSocialNetwork();
+          snForm.patchValue({
+            type: sn.type,
+            url: sn.url,
+          });
+          snArray.push(snForm);
+        }
+      });
+    }
   }
-}
 }
