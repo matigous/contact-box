@@ -1,50 +1,36 @@
-<ng-container
-  *ngIf="
-    idContact === undefined || (idContact && contact) ;
-    else contactNotFound
-  "
->
-  <ng-container *ngIf="contactForm">
-    <mat-card class="contact-card">
-      <form
-        [formGroup]="contactForm"
-        (ngSubmit)="onSubmit()"
-        class="contact-form w-full"
-      >
-        <mat-card-header class="card-header">
-          <!-- Seção: Avatar e Nome -->
+<div class="contact-container">
 
-          <!-- TODO: Avaliar se src da <img> retornou imagem válida. -->
-          <div class="contact-info-row w-full">
-            <img
-              *ngIf="contactForm.get('photo')?.value; else noAvatar"
-              mat-card-avatar
-              class="avatar"
-              [style.cursor]="!isViewing() ? 'pointer' : ''"
-              [matTooltip]="
-                !isViewing() && !editingPhotoUrl ? 'Edit photo url' : ''
-              "
-              [src]="contactForm.get('photo')?.value"
-              alt="User Avatar"
-              (click)="!isViewing() ? toogleEditPhotoUrl() : null"
-            />
-            <ng-template #noAvatar>
-              <div mat-card-avatar 
-              class="no-avatar avatar no-avatar-color"
-              [style.cursor]="!isViewing() ? 'pointer' : ''"
-              [matTooltip]="
-                !isViewing() && !editingPhotoUrl ? 'Edit photo url' : ''
-              "
-              (click)="!isViewing() ? toogleEditPhotoUrl() : null">
-                <span class="letter-avatar">
-                  {{
+  <ng-container *ngIf="
+      idContact === undefined || (idContact && contact) ;
+      else contactNotFound
+    ">
+    <ng-container *ngIf="contactForm">
+      <mat-card class="contact-card">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form w-full">
+          <mat-card-header class="card-header">
+            <!-- Seção: Avatar e Nome -->
+
+            <!-- TODO: Avaliar se src da <img> retornou imagem válida. -->
+            <div class="contact-info-row w-full">
+              <img *ngIf="contactForm.get('photo')?.value; else noAvatar" mat-card-avatar class="avatar"
+                [style.cursor]="!isViewing() ? 'pointer' : ''" [matTooltip]="
+                  !isViewing() && !editingPhotoUrl ? 'Edit photo url' : ''
+                " [src]="contactForm.get('photo')?.value" alt="User Avatar"
+                (click)="!isViewing() ? toogleEditPhotoUrl() : null" />
+              <ng-template #noAvatar>
+                <div mat-card-avatar class="no-avatar avatar no-avatar-color"
+                  [style.cursor]="!isViewing() ? 'pointer' : ''" [matTooltip]="
+                  !isViewing() && !editingPhotoUrl ? 'Edit photo url' : ''
+                " (click)="!isViewing() ? toogleEditPhotoUrl() : null">
+                  <span class="letter-avatar">
+                    {{
                     contactForm.get("name")?.value
-                      ? contactForm.get("name")?.value.charAt(0).toUpperCase()
-                      : "A"
-                  }}
-                </span>
-              </div>
-            </ng-template>
+                    ? contactForm.get("name")?.value.charAt(0).toUpperCase()
+                    : "A"
+                    }}
+                  </span>
+                </div>
+              </ng-template>
 
               <div class="contact-info-item">
                 <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item"
@@ -59,35 +45,22 @@
                   </mat-error>
                 </mat-form-field>
 
-              <!-- Back Navigation -->
-              <button
-                mat-icon-button
-                class="go-back-icon"
-                (click)="router.navigate(['/'])"
-                matTooltip="Go back to list"
-                type="button"
-              >
-                <mat-icon class="go-back-icon-color">arrow_back</mat-icon>
-              </button>
+                <!-- Back Navigation -->
+                <button mat-icon-button class="go-back-icon" (click)="router.navigate(['/'])"
+                  matTooltip="Go back to list" type="button">
+                  <mat-icon class="go-back-icon-color">arrow_back</mat-icon>
+                </button>
 
-              <!-- Favorite Toggle -->
-              <button
-                mat-icon-button
-                class="favorite-icon"
-                (click)="toggleFavorite()"
-                [matTooltip]="
-                  contactForm.get('fav')?.value
-                    ? 'Remove favorite'
-                    : 'Add favorite'
-                "
-                type="button"
-              >
-                <mat-icon
-                  [class]="
-                    contactForm.get('fav')?.value ? 'favorite-icon-color' : ''
-                  "
-                >
-                  {{
+                <!-- Favorite Toggle -->
+                <button mat-icon-button class="favorite-icon" (click)="toggleFavorite()" [matTooltip]="
+                    contactForm.get('fav')?.value
+                      ? 'Remove favorite'
+                      : 'Add favorite'
+                  " type="button">
+                  <mat-icon [class]="
+                      contactForm.get('fav')?.value ? 'favorite-icon-color' : ''
+                    ">
+                    {{
                     contactForm.get("fav")?.value
                     ? "favorite"
                     : "favorite_border"
@@ -109,40 +82,23 @@
               </mat-form-field>
             </div>
 
-          <!-- Phone and e-mail -->
-          <div class="contact-info-row">
-            <mat-form-field
-              [appearance]="isViewing() ? 'fill' : 'outline'"
-              class="contact-info-item"
-            >
-              <mat-label>Phone</mat-label>
-              <input
-                matInput
-                formControlName="phone"
-                [readonly]="isViewing()"
-                placeholder="+55 11 91234-5678"
-              />
-              <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
-                Phone is required.
-              </mat-error>
-              <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern')">
-                Must be a valid Phone. Ex: +55 11 91234-5678
-              </mat-error>
-              <button
-                mat-icon-button
-                matSuffix
-                matTooltip="Open in Whatsapp"
-                type="button"
-                class="btn-whatsapp"
-                [style.display]="!isViewing() ? 'none' : 'block'"
-                (click)="openWhatsapp(contactForm.get('phone')?.value)"
-              >
-                <img
-                  [src]="socialNetworksIcon(enumSocialNetworks.WhatsApp)"
-                  class="icon-social-network"
-                />
-              </button>
-            </mat-form-field>
+            <!-- Phone and e-mail -->
+            <div class="contact-info-row">
+              <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item">
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone" [readonly]="isViewing()" placeholder="+55 11 91234-5678" />
+                <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
+                  Phone is required.
+                </mat-error>
+                <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern')">
+                  Must be a valid Phone. Ex: +55 11 91234-5678
+                </mat-error>
+                <button mat-icon-button matSuffix matTooltip="Open in Whatsapp" type="button" class="btn-whatsapp"
+                  [style.display]="!isViewing() ? 'none' : 'block'"
+                  (click)="openWhatsapp(contactForm.get('phone')?.value)">
+                  <img [src]="socialNetworksIcon(enumSocialNetworks.WhatsApp)" class="icon-social-network" />
+                </button>
+              </mat-form-field>
 
               <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item">
                 <mat-label>Email</mat-label>
@@ -158,57 +114,35 @@
               </mat-form-field>
             </div>
 
-          <!-- Social Networks -->
-          <div class="contact-info-row">
-            <ng-container
-              *ngIf="contactForm.get('socialNetworks')?.value as sns"
-            >
-              <div *ngIf="sns.length" class="social-icons w-full">
-                <div class="contact-info-item">
-                  <mat-label *ngIf="!isViewing()">Social Networks</mat-label>
-                  <div class="btns-social-network">
-                    <ng-container *ngFor="let sn of sns">
-                      <img
-                        *ngIf="sn.type"
-                        [matTooltip]="'Open in ' + sn.type"
-                        (click)="openSocialNetwork(sn)"
-                        [src]="socialNetworksIcon(sn.type)"
-                        class="icon-social-network"
-                      />
-                    </ng-container>
+            <!-- Social Networks -->
+            <div class="contact-info-row">
+              <ng-container *ngIf="contactForm.get('socialNetworks')?.value as sns">
+                <div *ngIf="sns.length" class="social-icons w-full">
+                  <div class="contact-info-item">
+                    <mat-label *ngIf="!isViewing()">Social Networks</mat-label>
+                    <div class="btns-social-network">
+                      <ng-container *ngFor="let sn of sns">
+                        <img *ngIf="sn.type" [matTooltip]="'Open in ' + sn.type" (click)="openSocialNetwork(sn)"
+                          [src]="socialNetworksIcon(sn.type)" class="icon-social-network" />
+                      </ng-container>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </ng-container>
+              </ng-container>
 
-            <div
-              *ngIf="!isViewing()"
-              formArrayName="socialNetworks"
-              class="w-full"
-              style="margin-top: 1rem;"
-            >
-              <div
-                *ngFor="let sn of socialNetworksControls; let i = index"
-                [formGroupName]="i"
-                class="social-network flex-grow-1"
-              >
-                <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'">
-                  <mat-label>Type</mat-label>
-                  <mat-select formControlName="type">
-                    <mat-option
-                      *ngFor="let sn of availableSocialNetworks"
-                      [value]="sn.type"
-                    >
-                      <img
-                        [src]="sn.iconUrl"
-                        width="20"
-                        height="20"
-                        style="vertical-align: middle; margin-right: 8px"
-                      />
-                      {{ sn.type }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+              <div *ngIf="!isViewing()" formArrayName="socialNetworks" class="w-full" style="margin-top: 1rem;">
+                <div *ngFor="let sn of socialNetworksControls; let i = index" [formGroupName]="i"
+                  class="social-network flex-grow-1">
+                  <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                      <mat-option *ngFor="let sn of availableSocialNetworks" [value]="sn.type">
+                        <img [src]="sn.iconUrl" width="20" height="20"
+                          style="vertical-align: middle; margin-right: 8px" />
+                        {{ sn.type }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
                   <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="flex-grow-1">
                     <mat-label>URL</mat-label>
@@ -221,97 +155,60 @@
                     </mat-error>
                   </mat-form-field>
 
-                <button
-                  mat-icon-button
-                  color="warn"
-                  (click)="removeSocialNetwork(i)"
-                  type="button"
-                  matTooltip="Delete Social Network"
-                >
-                  <mat-icon class="btn-delete-color">delete</mat-icon>
+                  <button mat-icon-button color="warn" (click)="removeSocialNetwork(i)" type="button"
+                    matTooltip="Delete Social Network">
+                    <mat-icon class="btn-delete-color">delete</mat-icon>
+                  </button>
+                </div>
+
+                <button mat-stroked-button color="primary" type="button" matTooltip="Add New Social Network"
+                  (click)="addSocialNetwork()">
+                  <mat-icon>add</mat-icon> Social Network
                 </button>
               </div>
+            </div>
+          </mat-card-content>
 
-              <button
-                mat-stroked-button
-                color="primary"
-                type="button"
-                matTooltip="Add New Social Network"
-                (click)="addSocialNetwork()"
-              >
-                <mat-icon>add</mat-icon> Social Network
+          <!-- Actions buttons -->
+          <mat-card-actions class="card-actions">
+            <div *ngIf="!isViewing()" class="w-full btns-editing-creating">
+              <button mat-icon-button color="warn" type="button" matTooltip="Cancel" (click)="onCancel()">
+                <mat-icon style="color: #f44336">cancel</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" type="submit" [disabled]="contactForm.invalid" [matTooltip]="
+                  contactForm.invalid ? 'Review required fields to save' : 'Save'
+                ">
+                <mat-icon style="color: #1565C0">save</mat-icon>
               </button>
             </div>
-          </div>
-        </mat-card-content>
 
-        <!-- Actions buttons -->
-        <mat-card-actions class="card-actions">
-          <div *ngIf="!isViewing()" class="w-full btns-editing-creating">
-            <button
-              mat-icon-button
-              color="warn"
-              type="button"
-              matTooltip="Cancel"
-              (click)="onCancel()"
-            >
-              <mat-icon style="color: #f44336">cancel</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              color="primary"
-              type="submit"
-              [disabled]="contactForm.invalid"
-              [matTooltip]="
-                contactForm.invalid ? 'Review required fields to save' : 'Save'
-              "
-            >
-              <mat-icon style="color: #4caf50">save</mat-icon>
-            </button>
-          </div>
+            <div *ngIf="isViewing()" class="w-full btns-viewing">
+              <div class="btn-delete">
+                <button mat-icon-button color="primary" type="button" matTooltip="{{
+                    confirmingDelete ? 'Confirm delete' : 'Delete'
+                  }}" (click)="confirmingDelete ? onDelete() : onConfirmingDelete()">
+                  <mat-icon [class.btn-delete-color]="!confirmingDelete"
+                    [class.btn-delete-confirming-color]="confirmingDelete">
+                    {{ confirmingDelete ? "check" : "delete" }}
+                  </mat-icon>
+                </button>
+                <span *ngIf="confirmingDelete" class="btn-delete-confirming-color">
+                  Click to confirm delete
+                </span>
+              </div>
 
-          <div *ngIf="isViewing()" class="w-full btns-viewing">
-            <div class="btn-delete">
-              <button
-                mat-icon-button
-                color="primary"
-                type="button"
-                matTooltip="{{
-                  confirmingDelete ? 'Confirm delete' : 'Delete'
-                }}"
-                (click)="confirmingDelete ? onDelete() : onConfirmingDelete()"
-              >
-                <mat-icon
-                  [class.btn-delete-color]="!confirmingDelete"
-                  [class.btn-delete-confirming-color]="confirmingDelete"
-                >
-                  {{ confirmingDelete ? "check" : "delete" }}
-                </mat-icon>
+              <button mat-icon-button color="primary" type="button" matTooltip="Edit" (click)="onEdit()">
+                <mat-icon style="color: #1976d2">edit</mat-icon>
               </button>
-              <span
-                *ngIf="confirmingDelete"
-                class="btn-delete-confirming-color"
-              >
-                Click to confirm delete
-              </span>
             </div>
-
-            <button
-              mat-icon-button
-              color="primary"
-              type="button"
-              matTooltip="Edit"
-              (click)="onEdit()"
-            >
-              <mat-icon style="color: #1976d2">edit</mat-icon>
-            </button>
-          </div>
-        </mat-card-actions>
-      </form>
-    </mat-card>
+          </mat-card-actions>
+        </form>
+      </mat-card>
+    </ng-container>
   </ng-container>
-</ng-container>
-<ng-template #contactNotFound>
-  <div *ngIf="!loading" class="contact-not-found">Contact not found...</div>
-  <div *ngIf="loading" class="contact-not-found">Carregando...</div>
-</ng-template>
+  <ng-template #contactNotFound>
+    <div *ngIf="!loading" class="contact-not-found">Contact not found...</div>
+    <div *ngIf="loading" class="contact-not-found">Carregando...</div>
+  </ng-template>
+
+</div>

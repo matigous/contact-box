@@ -4,11 +4,14 @@
     <input class="filter-input" type="text" [(ngModel)]="filterText" (ngModelChange)="filterContacts()"
       placeholder="Filtrar contatos..." />
   </div>
-  <!-- <span class="spacer"></span> -->
+  <span class="spacer"></span>
+
   <button matMiniFab class="favorite-icon" (click)="toggleLikedFilter()" type="button">
     <mat-icon>
       {{filterLike ? "favorite" : "favorite_border"}}
     </mat-icon>
   </button>
-  <button class="new-button" routerLink='/contact-details/'>Adicionar Novo</button>
+  <button class="new-button" routerLink='/contact-details/'>Adicionar</button>
 </div>
+  <!-- <span class="spacer"></span> -->
+

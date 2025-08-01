@@ -1,28 +1,42 @@
 .app-header {
-  height: 8vh;
+  height: 120px;
 
   mat-toolbar {
     display: flex;
-    background-color: var(--mat-sys-primary);
+    background-color: #171d25;
     border-radius: 0;
-    color: var(--mat-sys-on-primary);
-    padding: 0 10px;
+
+    padding: 0 150px;
     height: 100%;
+
   }
 
   img {
-    height: 86px;
+    height: 140px;
   }
 
-  h1 {
-    display: block;
-    margin-right: 0 auto;
-    text-align: center;
+  .title-header {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
     flex: 1;
     z-index: 1;
-    font-size: 1.5rem;
-    font-weight: 500;
+    gap: 5px;
+
+    .first-sentence {
+      font-weight: 500;
+      color: rgb(255, 255, 255);
+      font-size: 20px;
+      padding-left: 5px;
+    }
+
+    .second-sentence {
+      color: #263F54;
+      font-size: 40px;
+      font-weight: 900;
+    }
   }
+
   .spacer {
     flex: 0 1 120px;
   }

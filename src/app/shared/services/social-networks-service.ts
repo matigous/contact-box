@@ -4,7 +4,6 @@ import { Observable, BehaviorSubject, of, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AvailableSocialNetwork, SocialNetworkType } from '../models/social-network-model';
 
-
 @Injectable({
   providedIn: 'root',
 })

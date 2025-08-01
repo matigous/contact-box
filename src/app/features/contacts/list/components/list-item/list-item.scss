@@ -1,17 +1,21 @@
 .contact-container {
   display: flex;
   flex-direction: row;
-  height: 70px;
+  height: 65px;
   justify-content: space-between;
-  cursor: pointer;
+}
+
+.contact-container:hover {
+  transform: scale(1.02);
+  transition: transform 150ms ease-in-out;
+
 }
 
 .mat-mdc-card {
   box-shadow: none;
   border-radius: 0;
-  border-radius: 15px;
-  background-color: #ffffff;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 5px 8px;
+  border-radius: 8px;
+  background-color: #16202D;
 }
 
 .mat-mdc-card:hover {
@@ -33,10 +37,22 @@
   margin: 0;
 }
 
-.mat-mdc-card-actions {
-  width: 200px;
+.social-network-container {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+  flex: 1;
+ 
+}
+
+.social-network-content {
+  display: flex;
+  gap: 8px;
+}
+
+.social-network-icon {
+  width: 28px;
 }
 
 .mdc-fab {
@@ -49,19 +65,21 @@
   height: 32px;
 }
 
-.mat-divider {
-  border-color: #cfcfcfe0;
-}
-
 .no-avatar {
   display: flex;
   justify-content: center;
   align-items: centerr;
   background-color: #3e7bee;
-
 }
 
 .letter-avatar {
   color: white;
   margin: 12px;
+}
+
+.mat-mdc-card-subtitle {
+  font-weight: 400;
+}
+.fav-button-toogle{
+  cursor: pointer;
 }

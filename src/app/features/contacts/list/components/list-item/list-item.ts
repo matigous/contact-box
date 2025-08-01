@@ -7,8 +7,9 @@ import {
   inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ThisReceiver } from '@angular/compiler';
+import { SocialNetworkIcon } from '../../../../../shared/models/social-network-model';
 import { Contact } from '../../../../../shared/models/contact-model';
+import { ContactsService } from '../../../../../shared/services/contacts-service';
 
 @Component({
   selector: 'app-list-item',
@@ -22,10 +23,11 @@ export class ListItem {
 
   @Input() contactItem: Contact = {} as Contact;
   @Output() onDelete = new EventEmitter();
+  
 
-  show(id: string) {
-    this.router.navigate(['/contact-details', id]);
+  constructor(private _contactsService: ContactsService) {    
   }
+
 
   edit(id: string, event: Event) {
     event.stopPropagation();
@@ -39,5 +41,14 @@ export class ListItem {
   delete(id: string, event: Event) {
     event.stopPropagation();
     this.onDelete.emit(id);
+  }
+
+  getIcon(icon: string) {
+    return SocialNetworkIcon[icon as keyof typeof SocialNetworkIcon];
+  }
+  toggleFav(event: Event) {
+    event.stopPropagation();
+    this._contactsService.updateContact(this.contactItem.id, {...this.contactItem, fav:!this.contactItem.fav
+    }).subscribe()
   }
 }

@@ -1,25 +1,23 @@
-.detail-container {
-  margin: 0 auto;
-  padding: 40px;
-  width: 80%;
-  max-width: 900px;
-  height: 100%;
-  overflow: hidden;
+.contact-container {
+  padding: 20px
 }
 
 .contact-card {
+  margin: 50;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 16rem);
   position: relative;
   max-width: 900px;
   width: 80%;
   margin: 0 auto;
   align-items: center;
+  background-color:
+    #16202D;
 
   .card-content {
-    height: calc(100vh - 25rem);
+    height: calc(100vh - 31.5rem);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -27,7 +25,7 @@
     // mat-form-field {
     //   height: 68px;
     // }
-    
+
     // mdc-text-field {
     //   background: transparent;
     // }
@@ -121,7 +119,7 @@
 }
 
 .go-back-icon-color {
-  color: #000000;
+  color: #ffffff;
 }
 
 .favorite-icon {
@@ -189,31 +187,26 @@
   color: #d32f2f;
 }
 
-:host {
-  padding: 1rem;  
+
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgba(191, 224, 247, 0.533);
 }
 
-::ng-deep 
-  
-    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-      background-color: rgba(191, 224, 247, 0.533);
-    }
-    
-    .icon-social-network {
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-    }
-    .save-button {
-      color: #1976d2;
-    }
+.icon-social-network {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
 
-    button[disabled] .save-button {
-      color: #575757;
-    }
-    .contact-not-found {
-      font-size: 3rem;
-    }
-  
+.save-button {
+  color: #1976d2;
+}
 
-  
+button[disabled] .save-button {
+  color: #575757;
+}
+
+.contact-not-found {
+  font-size: 3rem;
+}
