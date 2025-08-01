@@ -10,9 +10,8 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './list.scss',
 })
 export class List {
-  public contacts: Contact[] = [];
+  contacts: Contact[] = [];
   contactsListFiltered: Contact[] = [];
-  contactsFilterOptions: String = '';
   private destroy$ = new Subject<void>();
 
   constructor(private _contactsService: ContactsService) {
@@ -27,28 +26,6 @@ export class List {
         this.contacts = this.sortContacts(contacts);
         this.contactsListFiltered = this.sortContacts(contacts);
       });
-
-    this.onFilter(this.contactsFilterOptions);
-  }
-
-  updateFilter(filter: string) {
-    this.contactsFilterOptions = filter;
-    this.onFilter(this.contactsFilterOptions);
-  }
-
-  onFilter(contactsOptions: any) {
-    let dataFiltered: any[] = [];
-    const filter = this.contactsFilterOptions.toLowerCase().trim();
-
-    if (!filter) {
-      return (this.contactsListFiltered = this.contacts);
-    }
-
-    dataFiltered = this.contacts.filter((contact) => {
-      return contact.name.toLocaleLowerCase().includes(filter);
-    });
-
-    return (this.contactsListFiltered = dataFiltered);
   }
 
   protected onDelete(idContact: string) {
@@ -65,5 +42,9 @@ export class List {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  updateFilter(filteredContacts: Contact[]) {
+    this.contactsListFiltered = filteredContacts;
   }
 }
