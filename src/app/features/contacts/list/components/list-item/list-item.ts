@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { SocialNetworkIcon } from '../../../../../shared/models/social-network-model';
 import { Contact } from '../../../../../shared/models/contact-model';
+import { ContactsService } from '../../../../../shared/services/contacts-service';
 
 @Component({
   selector: 'app-list-item',
@@ -22,6 +23,11 @@ export class ListItem {
 
   @Input() contactItem: Contact = {} as Contact;
   @Output() onDelete = new EventEmitter();
+  
+
+  constructor(private _contactsService: ContactsService) {    
+  }
+
 
   edit(id: string, event: Event) {
     event.stopPropagation();
@@ -39,5 +45,10 @@ export class ListItem {
 
   getIcon(icon: string) {
     return SocialNetworkIcon[icon as keyof typeof SocialNetworkIcon];
+  }
+  toggleFav(event: Event) {
+    event.stopPropagation();
+    this._contactsService.updateContact(this.contactItem.id, {...this.contactItem, fav:!this.contactItem.fav
+    }).subscribe()
   }
 }

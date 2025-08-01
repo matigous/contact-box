@@ -6,7 +6,7 @@
 }
 
 .contact-container:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   transition: transform 150ms ease-in-out;
 
 }
@@ -36,7 +36,6 @@
 .mat-mdc-card-avatar {
   margin: 0;
 }
-
 
 .social-network-container {
   display: flex;
@@ -80,4 +79,7 @@
 
 .mat-mdc-card-subtitle {
   font-weight: 400;
+}
+.fav-button-toogle{
+  cursor: pointer;
 }

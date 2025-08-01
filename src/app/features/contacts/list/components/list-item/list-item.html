@@ -37,8 +37,8 @@
         <img class="social-network-icon" [src]="getIcon(icon.type)">
       </div>
     </div>
-    <div>
-      <mat-icon style=" padding-left: 20px;" [class]="contactItem.fav ?'favorite-icon-color' : ''
+    <div class="fav-button-toogle" (click)="toggleFav($event)"> 
+      <mat-icon  style=" padding-left: 20px;" [class]="contactItem.fav ?'favorite-icon-color' : ''
                   ">
         {{
         contactItem.fav ? "favorite": "favorite_border"
