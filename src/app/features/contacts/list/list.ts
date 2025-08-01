@@ -3,6 +3,7 @@ import { ContactsService } from '../../../shared/services/contacts-service';
 import { Contact } from '../../../shared/models/contact-model';
 import { Subject, takeUntil } from 'rxjs';
 
+
 @Component({
   selector: 'app-list',
   standalone: false,
