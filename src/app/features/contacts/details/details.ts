@@ -79,7 +79,10 @@ export class Details implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.contactForm) {
+    }
+  }
 
   protected isViewing(): boolean {
     return this.mode === 'viewing';
@@ -107,6 +110,7 @@ export class Details implements OnInit {
         .subscribe({
           next: (contact) => {
             this.contact = contact;
+            this.contact.phone = this.formatPhone(contact.phone);
             this.formService.fillForm(this.contact);
             this.loading = false;
           },
@@ -212,6 +216,8 @@ export class Details implements OnInit {
   protected onSubmit() {
     if (this.contactForm?.valid) {
       let contact: Contact = this.contactForm?.getRawValue();
+      console.log('Contact to save:', contact);
+      contact.phone.replace(/\D/g, '');
       if (this.isCreating()) {
         contact.id = Date.now().toString(); //TODO: Verificar se precisa.
         this.contactsService
@@ -261,6 +267,38 @@ export class Details implements OnInit {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    this.formService.formGroup?.reset();
+    if (this.contactForm) {
+      this.contactForm.reset();
+      const snArray = this.contactForm.get('socialNetworks') as FormArray;
+      if (snArray) {
+        while (snArray.length > 0) {
+          snArray.removeAt(0);
+        }
+      }
+    }
+    console.log(this.contactForm?.value.socialNetworks);
+  }
+  formatPhoneInput() {
+    const phoneInput = document.getElementById(
+      'phone-input'
+    ) as HTMLInputElement;
+    phoneInput.value = this.formatPhone(phoneInput.value);
+  }
+  formatPhone(phone: string): string {
+    if (phone) {
+      let value = phone.replace(/\D/g, '');
+      if (value.length > 10) {
+        value = value.slice(0, 11);
+      }
+      if (value.length >= 10) {
+        value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+      } else if (value.length >= 2) {
+        value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+      } else if (value.length === 1) {
+        value = `(${value})`;
+      }
+      return value;
+    }
+    return '';
   }
 }

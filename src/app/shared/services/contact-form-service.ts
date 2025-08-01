@@ -18,8 +18,8 @@ export class ContactFormService {
     {
       id: [''],
       name: ['', [Validators.required, Validators.minLength(3)]],
-      ddi: ['', [Validators.pattern(/^\+\d{1,3}$/)]],
-      phone: ['', [Validators.pattern(/^\d{10,11}$/)]],
+      ddi: ['+55', [Validators.pattern(/^\+\d{1,3}$/)]],
+      phone: ['', [Validators.pattern(/^\(\d{2}\) \d{4,5}-\d{4}$/)]],
       email: ['', [Validators.email]],
       fav: [false],
       photo: [
