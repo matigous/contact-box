@@ -6,9 +6,9 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { Contact } from '../../../../../shared/types/types';
 import { Router } from '@angular/router';
 import { ThisReceiver } from '@angular/compiler';
+import { Contact } from '../../../../../shared/models/contact-model';
 
 @Component({
   selector: 'app-list-item',
