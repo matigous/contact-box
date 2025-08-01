@@ -24,7 +24,7 @@
     color: white;
   }
 
-  button {
+  .new-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,8 +67,31 @@
     gap: 8px;
 
   }
-}
+  .spacer {
+    flex-grow: 1;
+  }
+  .favorite-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
 
 .spacer {
   flex-grow: 1;
+}
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+  .favorite-icon mat-icon {
+    color: #1976d2;
+    font-size: 24px;
+    inset: 0 4px;
+  }
 }

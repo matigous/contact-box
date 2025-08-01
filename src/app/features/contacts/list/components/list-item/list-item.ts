@@ -6,10 +6,9 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { Contact } from '../../../../../shared/models/contact-model';
 import { Router } from '@angular/router';
 import { SocialNetworkIcon } from '../../../../../shared/models/social-network-model';
-import { ThisReceiver } from '@angular/compiler';
+import { Contact } from '../../../../../shared/models/contact-model';
 
 @Component({
   selector: 'app-list-item',

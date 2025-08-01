@@ -1,9 +1,17 @@
 <div class="filter-container">
   <div class="filter-input-combo">
     <mat-icon>search</mat-icon>
-    <input class="filter-input" type="text" [(ngModel)]="filterText" (ngModelChange)="emitFilter()"
+    <input class="filter-input" type="text" [(ngModel)]="filterText" (ngModelChange)="filterContacts()"
       placeholder="Filtrar contatos..." />
   </div>
   <span class="spacer"></span>
   <button routerLink='/contact-details/'>Adicionar</button>
+  <button matMiniFab class="favorite-icon" (click)="toggleLikedFilter()" type="button">
+    <mat-icon>
+      {{filterLike ? "favorite" : "favorite_border"}}
+    </mat-icon>
+  </button>
+  <button class="new-button" routerLink='/contact-details/'>Adicionar Novo</button>
 </div>
+  <!-- <span class="spacer"></span> -->
+
