@@ -1,46 +1,90 @@
-# ContactBox
+# 📝 ContactBox
 
-Projeto de lista de contatos do curso ada caixaverso GRUPO 4.
+Project developed by Group 4 for the ADA Caixaverso course. ContactBox (Box de Contatos) is a web application for managing a contact list, allowing you to add, favorite, edit, view, and remove contacts in a simple and intuitive way.
 
-## Development server
+## 🛠️ Technologies Used
 
-To start a local development server, run:
+### Core
+
+- **Angular 20**: Main framework.
+- **TypeScript**: Development language.
+- **Angular Material**: UI component library.
+- **RxJS**: Reactive programming.
+- **SCSS**: CSS pre-processor.
+- **JSON Server**: Mock API for development.
+
+## 🚀 Features
+- ✅ **Add Contacts**: Easily add new contacts with details like name, email, and phone number.
+- ✅ **Edit Contacts**: Modify existing contact information.
+- ✅ **View Contacts**: View a list of all contacts with their details.
+- ✅ **Delete Contacts**: Remove contacts from the list.
+- ✅ **Filter Contacts**: Search for contacts by name or email.
+- ✅ **Favorite Contacts**: Mark contacts as favorites for quick access.
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/matigous/contact-box.git
+cd contact-box
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+## How to run
+
+### Method 1 (concurrently)
 
 ```bash
 npm run dev
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-(if concurrently command breaks use the method number 2)
+Access `http://localhost:4200/` in your browser.
 
-## Development server 2
+### Method 2 (manual)
 
-To start a local development server, run:
+In one terminal, run:
 
 ```bash
 ng serve
 ```
 
-```bash 2
+In another terminal, run:
+
+```bash
 npm run json-server-d
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Access `http://localhost:4200/` in your browser.
 
-## Building
+## Build
 
-To build the project run:
+To generate a production build:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The files will be generated in the `dist/` folder.
 
-## Running unit tests
+## Tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+To run unit tests:
 
 ```bash
 ng test
 ```
+
+## Contribution
+
+Feel free to open issues or pull requests to suggest improvements or report problems.
+
+## License
+
+This project is licensed under the MIT license.
+
