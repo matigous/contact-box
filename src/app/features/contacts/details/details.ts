@@ -55,16 +55,15 @@ export class Details implements OnInit {
     this.modeQueryParams =
       this.activatedRoute.snapshot.queryParamMap.get('m') ?? '';
 
+    // Get Reactive Form
+    this.contactForm = this.formService.formGroup;
+
     // Get Social Networks
     this.socialNetworksService.availableSocialNetworks$
       .pipe(takeUntil(this.destroy$))
       .subscribe((sns) => {
         this.availableSocialNetworks = sns;
       });
-
-    // Get Reactive Form
-    this.contactForm = this.formService.formGroup;
-
     // Get Contact
     this.getContactOrNewContact();
   }
@@ -79,10 +78,7 @@ export class Details implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    if (this.contactForm) {
-    }
-  }
+  ngOnInit(): void {}
 
   protected isViewing(): boolean {
     return this.mode === 'viewing';
@@ -116,7 +112,7 @@ export class Details implements OnInit {
           },
           error: (err) => {
             this.sendMessage(
-              'You will be redirected to the contact list in 5 seconds',
+              'Você vai ser redirecionado para a lista em 5 segundos',
               undefined,
               5000
             );
@@ -179,8 +175,8 @@ export class Details implements OnInit {
     const current = this.contactForm?.get('fav')?.value;
     this.contactForm?.patchValue({ fav: !current });
 
-    if (current) this.sendMessage('Contact was unfavorite');
-    else this.sendMessage('Contact has been favorited');
+    if (current) this.sendMessage('Contato foi desfavoritado');
+    else this.sendMessage('Contato foi favoritado');
 
     const contact = this.contactForm?.getRawValue();
 
@@ -215,7 +211,8 @@ export class Details implements OnInit {
   protected onSubmit() {
     if (this.contactForm?.valid) {
       let contact: Contact = this.contactForm?.getRawValue();
-      contact.phone.replace(/\D/g, '');
+      contact.phone?.replace(/\D/g, '');
+      contact.ddi = '+55';
       if (this.isCreating()) {
         contact.id = Date.now().toString();
         this.contactsService
@@ -223,7 +220,7 @@ export class Details implements OnInit {
           .pipe(takeUntil(this.destroy$))
           .subscribe((newContact) => {
             this.switchViewingMode();
-            this.sendMessage('Contact added');
+            this.sendMessage('Contato adicionado');
             this.router.navigate(['/contact-details/' + newContact.id]);
           });
       }
@@ -234,7 +231,7 @@ export class Details implements OnInit {
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
             this.switchViewingMode();
-            this.sendMessage('Contact edited');
+            this.sendMessage('Contato atualizado');
           });
       }
     }
@@ -253,7 +250,7 @@ export class Details implements OnInit {
   protected onDelete() {
     if (this.idContact) {
       this.contactsService.deleteContact(this.idContact).subscribe();
-      this.sendMessage('Contact deleted');
+      this.sendMessage('Contato Apagado');
 
       setTimeout(() => {
         this.router.navigate(['/']);
@@ -264,15 +261,7 @@ export class Details implements OnInit {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    if (this.contactForm) {
-      this.contactForm.reset();
-      const snArray = this.contactForm.get('socialNetworks') as FormArray;
-      if (snArray) {
-        while (snArray.length > 0) {
-          snArray.removeAt(0);
-        }
-      }
-    }
+    this.resetContatForm();
   }
   formatPhoneInput() {
     const phoneInput = document.getElementById(
@@ -296,5 +285,18 @@ export class Details implements OnInit {
       return value;
     }
     return '';
+  }
+  resetContatForm() {
+    if (this.contactForm) {
+      this.contactForm.reset();
+      this.contactForm.markAsPristine();
+      this.contactForm.markAsUntouched();
+      const snArray = this.contactForm.get('socialNetworks') as FormArray;
+      if (snArray) {
+        while (snArray.length > 0) {
+          snArray.removeAt(0);
+        }
+      }
+    }
   }
 }
