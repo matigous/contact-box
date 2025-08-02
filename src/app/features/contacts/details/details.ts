@@ -185,10 +185,9 @@ export class Details implements OnInit {
     const contact = this.contactForm?.getRawValue();
 
     if (contact) {
-      // this.contactsService.updateContact(contact.id, contact);
-      this.contactsService.updateContact(contact.id, contact).subscribe(
-        (next) => (this.contact = contact) //TODO: Verificar se precisa.
-      );
+      this.contactsService
+        .updateContact(contact.id, contact)
+        .subscribe((next) => (this.contact = contact));
     }
   }
 
@@ -204,7 +203,7 @@ export class Details implements OnInit {
       if (this.modeQueryParams == '1') this.modeQueryParams = '';
     } else {
       this.contactForm?.reset();
-      this.router.navigate(['/']); //TODO: Adicionar confirmação
+      this.router.navigate(['/']);
     }
   }
 
@@ -216,10 +215,9 @@ export class Details implements OnInit {
   protected onSubmit() {
     if (this.contactForm?.valid) {
       let contact: Contact = this.contactForm?.getRawValue();
-      console.log('Contact to save:', contact);
       contact.phone.replace(/\D/g, '');
       if (this.isCreating()) {
-        contact.id = Date.now().toString(); //TODO: Verificar se precisa.
+        contact.id = Date.now().toString();
         this.contactsService
           .addContact(contact)
           .pipe(takeUntil(this.destroy$))
@@ -254,7 +252,6 @@ export class Details implements OnInit {
 
   protected onDelete() {
     if (this.idContact) {
-      // this.contactsService.deleteContact(this.idContact);
       this.contactsService.deleteContact(this.idContact).subscribe();
       this.sendMessage('Contact deleted');
 
@@ -276,7 +273,6 @@ export class Details implements OnInit {
         }
       }
     }
-    console.log(this.contactForm?.value.socialNetworks);
   }
   formatPhoneInput() {
     const phoneInput = document.getElementById(
