@@ -51,6 +51,7 @@ export class ContactFormService {
     this.formGroup.patchValue({
       id: contact.id,
       name: contact.name,
+      ddi: contact.ddi,
       phone: contact.phone,
       email: contact.email ?? null,
       fav: contact.fav,

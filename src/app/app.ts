@@ -6,6 +6,4 @@ import { Component, signal } from '@angular/core';
   standalone: false,
   styleUrl: './app.scss',
 })
-export class App {
-  // protected readonly title = signal('contact-box');
-}
+export class App {}

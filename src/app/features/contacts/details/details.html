@@ -35,27 +35,27 @@
               <div class="contact-info-item">
                 <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item"
                   [ngClass]="{ 'no-border': !isViewing() }">
-                  <mat-label>Name</mat-label>
+                  <mat-label>Nome</mat-label>
                   <input matInput formControlName="name" [readonly]="isViewing()" required />
                   <mat-error *ngIf="contactForm.get('name')?.hasError('required')">
-                    Name is required.
+                    Nome é obrigatório.
                   </mat-error>
                   <mat-error *ngIf="contactForm.get('name')?.hasError('minlength')">
-                    Minimum 3 characters.
+                    Minimo 3 caracteres.
                   </mat-error>
                 </mat-form-field>
 
                 <!-- Back Navigation -->
                 <button mat-icon-button class="go-back-icon" (click)="router.navigate(['/'])"
-                  matTooltip="Go back to list" type="button">
+                  matTooltip="Voltar para a lista" type="button">
                   <mat-icon class="go-back-icon-color">arrow_back</mat-icon>
                 </button>
 
                 <!-- Favorite Toggle -->
                 <button mat-icon-button class="favorite-icon" (click)="toggleFavorite()" [matTooltip]="
                     contactForm.get('fav')?.value
-                      ? 'Remove favorite'
-                      : 'Add favorite'
+                      ? 'Remover favorito'
+                      : 'Adicionar favorito'
                   " type="button">
                   <mat-icon [class]="
                       contactForm.get('fav')?.value ? 'favorite-icon-color' : ''
@@ -74,10 +74,10 @@
           <mat-card-content class="card-content">
             <div *ngIf="!isViewing() && editingPhotoUrl" class="contact-info-row">
               <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="photo-url">
-                <mat-label>Photo URL</mat-label>
+                <mat-label>URL da foto</mat-label>
                 <input #photoUrlInput matInput formControlName="photo" placeholder="Add photo url..." />
                 <mat-error *ngIf="contactForm.get('photo')?.hasError('pattern')">
-                  Must be a valid image URL.
+                  Tem que ser uma URL valida.
                 </mat-error>
               </mat-form-field>
             </div>
@@ -86,20 +86,20 @@
             <div class="contact-info-row">
               <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item formfield-ddi">
                 <mat-label>DDI</mat-label>
-                <input matInput formControlName="" [readonly]="true" value="+55" />
+                <input matInput formControlName="ddi" [readonly]="true" value="+55" />
               </mat-form-field>
               <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="contact-info-item">
-                <mat-label>Phone</mat-label>
+                <mat-label>Telefone</mat-label>
                 <input matInput id="phone-input" formControlName="phone" [readonly]="isViewing()"
                   placeholder="11 91234-5678" (change)="formatPhoneInput()" (keypress)="formatPhoneInput()"
                   maxlength="15" />
                 <mat-error *ngIf="contactForm.get('phone')?.hasError('required')">
-                  Phone is required.
+                  Telefone obrigatório.
                 </mat-error>
                 <mat-error *ngIf="contactForm.get('phone')?.hasError('pattern')">
-                  Must be a valid Phone. Ex: 11 91234-5678
+                  Tem que ser um telefone válido. Exemplo: 11 91234-5678 ou 11 3123-4567.
                 </mat-error>
-                <button mat-icon-button matSuffix matTooltip="Open in Whatsapp" type="button" class="btn-whatsapp"
+                <button mat-icon-button matSuffix matTooltip="Abrir no Whatsapp" type="button" class="btn-whatsapp"
                   [style.display]="!isViewing() ? 'none' : 'block'"
                   (click)="openWhatsapp(contactForm.get('ddi')?.value, contactForm.get('phone')?.value)">
                   <img [src]="socialNetworksIcon(enumSocialNetworks.WhatsApp)" class="icon-social-network" />
@@ -115,7 +115,7 @@
             <!-- Notes -->
             <div class="contact-info-row">
               <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'" class="w-full">
-                <mat-label>Notes</mat-label>
+                <mat-label>Anotações</mat-label>
                 <textarea matInput formControlName="notes" [readonly]="isViewing()"></textarea>
               </mat-form-field>
             </div>
@@ -128,7 +128,7 @@
                     <mat-label *ngIf="!isViewing()">Social Networks</mat-label>
                     <div class="btns-social-network">
                       <ng-container *ngFor="let sn of sns">
-                        <img *ngIf="sn.type" [matTooltip]="'Open in ' + sn.type" (click)="openSocialNetwork(sn)"
+                        <img *ngIf="sn.type" [matTooltip]="'Abrir ' + sn.type" (click)="openSocialNetwork(sn)"
                           [src]="socialNetworksIcon(sn.type)" class="icon-social-network" />
                       </ng-container>
                     </div>
@@ -140,7 +140,7 @@
                 <div *ngFor="let sn of socialNetworksControls; let i = index" [formGroupName]="i"
                   class="social-network flex-grow-1">
                   <mat-form-field [appearance]="isViewing() ? 'fill' : 'outline'">
-                    <mat-label>Type</mat-label>
+                    <mat-label>Rede</mat-label>
                     <mat-select formControlName="type">
                       <mat-option *ngFor="let sn of availableSocialNetworks" [value]="sn.type">
                         <img [src]="sn.iconUrl" width="20" height="20"
@@ -154,22 +154,22 @@
                     <mat-label>URL</mat-label>
                     <input matInput formControlName="url" placeholder="https://..." />
                     <mat-error *ngIf="sn.get('url')?.hasError('required')">
-                      URL is required.
+                      URL obrigatório
                     </mat-error>
                     <mat-error *ngIf="sn.get('url')?.hasError('pattern')">
-                      Must be a valid URL.
+                      Tem que ser um URL válido.
                     </mat-error>
                   </mat-form-field>
 
                   <button mat-icon-button color="warn" (click)="removeSocialNetwork(i)" type="button"
-                    matTooltip="Delete Social Network">
+                    matTooltip="Apagar Rede Social">
                     <mat-icon class="btn-delete-color">delete</mat-icon>
                   </button>
                 </div>
 
-                <button mat-stroked-button color="primary" type="button" matTooltip="Add New Social Network"
+                <button mat-stroked-button color="primary" type="button" matTooltip="Nova Rede Social"
                   (click)="addSocialNetwork()">
-                  <mat-icon>add</mat-icon> Social Network
+                  <mat-icon>add</mat-icon> Rede Social
                 </button>
               </div>
             </div>
@@ -178,11 +178,11 @@
           <!-- Actions buttons -->
           <mat-card-actions class="card-actions">
             <div *ngIf="!isViewing()" class="w-full btns-editing-creating">
-              <button mat-icon-button color="warn" type="button" matTooltip="Cancel" (click)="onCancel()">
+              <button mat-icon-button color="warn" type="button" matTooltip="Cancelar" (click)="onCancel()">
                 <mat-icon style="color: #f44336">cancel</mat-icon>
               </button>
               <button mat-icon-button color="primary" type="submit" [disabled]="contactForm.invalid" [matTooltip]="
-                  contactForm.invalid ? 'Review required fields to save' : 'Save'
+                  contactForm.invalid ? 'Reveja os campos necessários' : 'Salvar'
                 ">
                 <mat-icon class="save-button">save</mat-icon>
               </button>
@@ -191,7 +191,7 @@
             <div *ngIf=" isViewing()" class="w-full btns-viewing">
               <div class="btn-delete">
                 <button mat-icon-button color="primary" type="button" matTooltip="{{
-                    confirmingDelete ? 'Confirm delete' : 'Delete'
+                    confirmingDelete ? 'Confirmar' : 'Apagar'
                   }}" (click)="confirmingDelete ? onDelete() : onConfirmingDelete()">
                   <mat-icon [class.btn-delete-color]="!confirmingDelete"
                     [class.btn-delete-confirming-color]="confirmingDelete">
@@ -199,11 +199,11 @@
                   </mat-icon>
                 </button>
                 <span *ngIf="confirmingDelete" class="btn-delete-confirming-color">
-                  Click to confirm delete
+                  Click para confirmar
                 </span>
               </div>
 
-              <button mat-icon-button color="primary" type="button" matTooltip="Edit" (click)="onEdit()">
+              <button mat-icon-button color="primary" type="button" matTooltip="Editar" (click)="onEdit()">
                 <mat-icon style="color: #1976d2">edit</mat-icon>
               </button>
             </div>
